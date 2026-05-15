@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -964,7 +964,7 @@
         }
 
         .timeline-item.completed::before {
-            content: '?';
+            content: '✓';
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1739,7 +1739,7 @@
         }
 
         .role-timeline-segment.active::after {
-            content: '?';
+            content: '→';
             position: absolute;
             right: 10px;
             font-size: 24px;
@@ -1878,36 +1878,36 @@
 
         <div class="nav-items">
             <div class="nav-item active" onclick="app.showView('dashboard')">
-                <span class="nav-icon">??</span>
+                <span class="nav-icon">📊</span>
                 <span class="nav-label">Dashboard</span>
             </div>
             <div class="nav-item" onclick="app.showView('responsibilities')">
-                <span class="nav-icon">??</span>
+                <span class="nav-icon">🎯</span>
                 <span class="nav-label">Role Dimensions</span>
             </div>
             <div class="nav-item" onclick="app.showView('tasks')">
-                <span class="nav-icon">?</span>
+                <span class="nav-icon">✓</span>
                 <span class="nav-label">Tasks</span>
             </div>
             <div class="nav-item" onclick="app.showView('conversations')">
-                <span class="nav-icon">??</span>
+                <span class="nav-icon">💬</span>
                 <span class="nav-label">Conversations</span>
             </div>
             <div class="nav-item" onclick="app.showView('meetings')">
-                <span class="nav-icon">??</span>
+                <span class="nav-icon">📋</span>
                 <span class="nav-label">Meetings</span>
             </div>
             <div class="nav-item" onclick="app.showView('analytics')">
-                <span class="nav-icon">??</span>
+                <span class="nav-icon">📈</span>
                 <span class="nav-label">Analytics</span>
             </div>
             <div class="nav-item" onclick="app.showView('settings')">
-                <span class="nav-icon">??�</span>
+                <span class="nav-icon">⚙️</span>
                 <span class="nav-label">Settings</span>
             </div>
         </div>
 
-        <button class="toggle-btn" onclick="app.toggleSidebar()">?</button>
+        <button class="toggle-btn" onclick="app.toggleSidebar()">☰</button>
     </div>
 
     <!-- Main Content -->
@@ -1926,7 +1926,7 @@
             </div>
             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px;">
                 <div style="position: relative;">
-                    <input type="text" id="globalSearch" placeholder="🔍 Search across your tasks, meetings, conversations or roles"
+                    <input type="text" id="globalSearch" placeholder="🔔 Search tasks, meetings, conversations, notes..."
                            style="width: 100%; padding: 10px 15px; border: 2px solid var(--border); border-radius: 25px; background: var(--surface); color: var(--text); font-size: 14px;"
                            oninput="app.performGlobalSearch(this.value)"
                            onfocus="app.showSearchResults()"
@@ -1973,13 +1973,13 @@
                 <div style="display: flex; gap: 10px; align-items: center;">
                     <div style="display: flex; gap: 5px; background: var(--surface); padding: 5px; border-radius: 4px; border: 2px solid var(--border);">
                         <button class="task-view-btn active" id="viewBtnGrid" onclick="app.setTaskView('grid')" title="Grid View">
-                            �� Grid
+                            ■¦ Grid
                         </button>
                         <button class="task-view-btn" id="viewBtnKanban" onclick="app.setTaskView('kanban')" title="Kanban Board">
-                            ?? Kanban
+                            📋 Kanban
                         </button>
                         <button class="task-view-btn" id="viewBtnTimeline" onclick="app.setTaskView('timeline')" title="Timeline View">
-                            ??� Timeline
+                            🔍… Timeline
                         </button>
                     </div>
                     <button class="btn btn-primary" onclick="app.showTaskModal()">+ New Task</button>
@@ -2159,7 +2159,7 @@
                     <input type="text" id="conversationTags" placeholder="meeting, decision, brainstorm">
                 </div>
                 <div class="form-group" id="suggestedTasksSection" style="display: none;">
-                    <label>?? AI Suggested Tasks</label>
+                    <label>🤖 AI Suggested Tasks</label>
                     <div id="suggestedTasksList" style="margin-bottom: 10px;"></div>
                 </div>
                 <div class="form-group" id="manualTaskLinkSection">
@@ -2243,7 +2243,7 @@
                 </div>
                 <div class="form-group">
                     <label>Default Agenda Template (Optional)</label>
-                    <textarea id="meetingAgendaTemplate" placeholder="� Updates from last week&#10;� Blockers & challenges&#10;� Goals for this week&#10;� Action items" style="min-height: 120px;"></textarea>
+                    <textarea id="meetingAgendaTemplate" placeholder="• Updates from last week&#10;• Blockers & challenges&#10;• Goals for this week&#10;• Action items" style="min-height: 120px;"></textarea>
                     <small style="color: var(--text-muted);">AI will use this as a starting point for agenda suggestions</small>
                 </div>
                 <button type="submit" class="btn btn-primary" onclick="console.log('Button clicked')">Save Meeting</button>
@@ -2389,13 +2389,13 @@
 
             renderSidebar() {
                 const navItems = {
-                    'dashboard': { icon: '??', label: 'Dashboard' },
-                    'responsibilities': { icon: '??', label: 'Role Dimensions' },
-                    'tasks': { icon: '?', label: 'Tasks' },
-                    'conversations': { icon: '??', label: 'Conversations' },
-                    'meetings': { icon: '??', label: 'Meetings' },
-                    'analytics': { icon: '??', label: 'Analytics' },
-                    'settings': { icon: '??�', label: 'Settings' }
+                    'dashboard': { icon: '📊', label: 'Dashboard' },
+                    'responsibilities': { icon: '🎯', label: 'Role Dimensions' },
+                    'tasks': { icon: '✓', label: 'Tasks' },
+                    'conversations': { icon: '💬', label: 'Conversations' },
+                    'meetings': { icon: '📋', label: 'Meetings' },
+                    'analytics': { icon: '📈', label: 'Analytics' },
+                    'settings': { icon: '⚙️', label: 'Settings' }
                 };
 
                 const currentView = document.querySelector('.view.active')?.id || 'dashboard';
@@ -2579,7 +2579,7 @@
                              ondragend="app.handleWidgetDragEnd(event)"
                              style="cursor: move; transition: all 0.3s;">
                             <div class="widget-drag-handle" style="background: var(--surface-light); padding: 8px; text-align: center; cursor: grab; border-bottom: 1px solid var(--border); font-size: 12px; color: var(--text-muted); font-weight: 700;">
-                                ??? DRAG TO REORDER
+                                ⋮⋮⋮ DRAG TO REORDER
                             </div>
                             ${widgets[widgetId]}
                         </div>
@@ -2722,7 +2722,7 @@
                 return `
                     <div class="card">
                         <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                            <span>??</span> Meeting Analytics
+                            <span>📊</span> Meeting Analytics
                         </h3>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
@@ -2773,7 +2773,7 @@
                             <div class="progress-bar" style="height: 5px; margin-bottom: 6px;">
                                 <div class="progress-fill" style="width: ${progress}%"></div>
                             </div>
-                            <div style="font-size: 10px; color: var(--text-muted); line-height: 1.3;">${completedItems}/${totalItems} goals � ${tasks.length} tasks � ${openTasks} open</div>
+                            <div style="font-size: 10px; color: var(--text-muted); line-height: 1.3;">${completedItems}/${totalItems} goals • ${tasks.length} tasks • ${openTasks} open</div>
                         </div>
                     `;
                 }).join('');
@@ -2808,7 +2808,7 @@
                         <div style="background: var(--surface); border-left: 4px solid ${isOverdue ? 'var(--danger)' : statusColor}; padding: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.5)';" onmouseout="this.style.transform=''; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.3)';" onclick="app.editTask('${task.id}')">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                                 <div style="font-weight: 900; font-size: 12px; color: var(--text);">
-                                    ${task.title} ${isOverdue ? '<span style="color: var(--danger); font-size: 11px; margin-left: 4px;">?�</span>' : ''}
+                                    ${task.title} ${isOverdue ? '<span style="color: var(--danger); font-size: 11px; margin-left: 4px;">⚠ </span>' : ''}
                                 </div>
                                 <div style="font-size: 10px; font-weight: 700; color: ${isOverdue || isToday ? 'var(--danger)' : 'var(--text-light)'};">
                                     ${isToday ? 'TODAY' : dueDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}
@@ -3027,7 +3027,7 @@
                                 </td>
                                 <td style="padding: 10px;" colspan="2">
                                     <div style="font-weight: 700; font-size: 13px; margin-bottom: 4px;">${resp.name}</div>
-                                    <div style="font-size: 12px; color: var(--text-light);">Manager: ${resp.lineManager} � ${totalItems} goals in 180-day plan</div>
+                                    <div style="font-size: 12px; color: var(--text-light);">Manager: ${resp.lineManager} • ${totalItems} goals in 180-day plan</div>
                                 </td>
                                 <td style="padding: 10px; font-size: 11px; color: var(--text-muted);">${activity.date.toLocaleString('en-US', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'})}${dateNote}</td>
                                 <td style="padding: 10px;"><button class="btn btn-small btn-secondary" onclick="app.showView('responsibilities')">View</button></td>
@@ -3047,7 +3047,7 @@
                                 <td style="padding: 10px;">
                                     <div style="font-weight: 700; font-size: 13px; margin-bottom: 4px;">${conv.title}</div>
                                     <div style="font-size: 12px; color: var(--text-light); line-height: 1.4;">${summary}${conv.content && conv.content.length > 100 ? '...' : ''}</div>
-                                    ${linkedTasks.length > 0 ? `<div style="font-size: 11px; color: var(--adidas-yellow); margin-top: 4px;">??� Linked to: ${linkedTasks.map(t => t.title).join(', ')}</div>` : ''}
+                                    ${linkedTasks.length > 0 ? `<div style="font-size: 11px; color: var(--adidas-yellow); margin-top: 4px;">🔔— Linked to: ${linkedTasks.map(t => t.title).join(', ')}</div>` : ''}
                                 </td>
                                 <td style="padding: 10px;">
                                     ${role ? `<span style="width: 24px; height: 24px; border-radius: 50%; background: ${role.color}; color: ${role.color === '#FDE428' ? 'var(--primary)' : 'white'}; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 900;" title="${role.name}">${role.name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase()}</span>` : ''}
@@ -3133,8 +3133,8 @@
                                 </td>
                                 <td style="padding: 10px;">
                                     <div style="font-weight: 700; font-size: 13px; margin-bottom: 4px;">${meeting.title}</div>
-                                    <div style="font-size: 12px; color: var(--text-light);">${meeting.type.replace('-', ' ')} � ${recurrenceLabel} � ${meeting.duration || 30} min</div>
-                                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">?? ${meeting.attendees.slice(0, 2).join(', ')}${meeting.attendees.length > 2 ? ` +${meeting.attendees.length - 2} more` : ''}</div>
+                                    <div style="font-size: 12px; color: var(--text-light);">${meeting.type.replace('-', ' ')} • ${recurrenceLabel} • ${meeting.duration || 30} min</div>
+                                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">👥 ${meeting.attendees.slice(0, 2).join(', ')}${meeting.attendees.length > 2 ? ` +${meeting.attendees.length - 2} more` : ''}</div>
                                 </td>
                                 <td style="padding: 10px;">
                                     ${role ? `<span style="width: 24px; height: 24px; border-radius: 50%; background: ${role.color}; color: ${role.color === '#FDE428' ? 'var(--primary)' : 'white'}; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 900;" title="${role.name}">${role.name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase()}</span>` : ''}
@@ -3157,7 +3157,7 @@
                                 <td style="padding: 10px;">
                                     <div style="font-weight: 700; font-size: 13px; margin-bottom: 4px;">${meeting.title}</div>
                                     <div style="font-size: 12px; color: var(--text-light);">
-                                        ${instance.duration ? `??� ${instance.duration} min` : ''} ${actionItemCount > 0 ? `� ${actionItemCount} action item${actionItemCount > 1 ? 's' : ''}` : ''}
+                                        ${instance.duration ? `⏱️ ${instance.duration} min` : ''} ${actionItemCount > 0 ? `• ${actionItemCount} action item${actionItemCount > 1 ? 's' : ''}` : ''}
                                     </div>
                                     ${instance.notes ? `<div style="font-size: 11px; color: var(--text-muted); margin-top: 2px; line-height: 1.3;">${instance.notes.substring(0, 80)}${instance.notes.length > 80 ? '...' : ''}</div>` : ''}
                                 </td>
@@ -3179,7 +3179,7 @@
                                 </td>
                                 <td style="padding: 10px;">
                                     <div style="font-weight: 700; font-size: 13px; color: var(--text-light); text-decoration: line-through; margin-bottom: 4px;">${deletion.item.title}</div>
-                                    <div style="font-size: 12px; color: var(--text-muted);">${deletion.item.type} � ${deletion.item.attendees?.join(', ')}</div>
+                                    <div style="font-size: 12px; color: var(--text-muted);">${deletion.item.type} • ${deletion.item.attendees?.join(', ')}</div>
                                 </td>
                                 <td style="padding: 10px;">
                                     ${role ? `<span style="width: 24px; height: 24px; border-radius: 50%; background: ${role.color}; color: ${role.color === '#FDE428' ? 'var(--primary)' : 'white'}; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 900; opacity: 0.6;" title="${role.name}">${role.name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase()}</span>` : ''}
@@ -3198,7 +3198,7 @@
                                 </td>
                                 <td style="padding: 10px;">
                                     <div style="font-weight: 700; font-size: 13px; color: var(--text-light); text-decoration: line-through; margin-bottom: 4px;">${deletion.item.title}</div>
-                                    <div style="font-size: 12px; color: var(--text-muted);">${new Date(deletion.item.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})} ${deletion.item.hasTranscript ? '� Had transcript' : ''}</div>
+                                    <div style="font-size: 12px; color: var(--text-muted);">${new Date(deletion.item.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})} ${deletion.item.hasTranscript ? '• Had transcript' : ''}</div>
                                 </td>
                                 <td style="padding: 10px;"></td>
                                 <td style="padding: 10px; font-size: 11px; color: var(--text-muted);">${activity.date.toLocaleString('en-US', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</td>
@@ -3295,7 +3295,7 @@
                         <div class="responsibility-card ${resp.completed ? 'completed' : ''}" style="border-top-color: ${resp.completed ? 'var(--success)' : resp.color}" onclick="app.editResponsibility('${resp.id}')">
                             <div class="responsibility-card-header">
                                 <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
-                                    <span class="role-badge" style="background: ${resp.color}">${resp.name}${resp.completed ? ' ?' : ''}</span>
+                                    <span class="role-badge" style="background: ${resp.color}">${resp.name}${resp.completed ? ' ✓' : ''}</span>
                                     <div style="text-align: right;">
                                         <div style="font-size: 32px; font-weight: 900; color: var(--adidas-yellow); line-height: 1;">${progress}%</div>
                                         <div style="font-size: 9px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px;">Complete</div>
@@ -3340,9 +3340,9 @@
                                     </div>
                                 </div>
                                 <div class="task-actions" style="gap: 8px;">
-                                    ${!resp.completed ? `<button class="btn btn-small btn-success" onclick="event.stopPropagation(); app.completeResponsibility('${resp.id}')" title="Mark as Completed">?</button>` : ''}
-                                    <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.editResponsibility('${resp.id}')" title="Edit Responsibility">??�</button>
-                                    <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteResponsibility('${resp.id}')" title="Delete Responsibility">???</button>
+                                    ${!resp.completed ? `<button class="btn btn-small btn-success" onclick="event.stopPropagation(); app.completeResponsibility('${resp.id}')" title="Mark as Completed">✓</button>` : ''}
+                                    <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.editResponsibility('${resp.id}')" title="Edit Responsibility">✏️</button>
+                                    <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteResponsibility('${resp.id}')" title="Delete Responsibility">🗑️</button>
                                 </div>
                             </div>
                         </div>
@@ -3461,7 +3461,7 @@
                              onclick="app.editResponsibility('${role.id}')"
                              title="${tooltipText}">
                             <div class="role-timeline-label" style="border-color: ${role.color}; color: ${role.color};">
-                                ${role.name}${role.completed ? ' ?' : ''}${role.isOngoing ? ' (Ongoing)' : ''}
+                                ${role.name}${role.completed ? ' ✓' : ''}${role.isOngoing ? ' (Ongoing)' : ''}
                             </div>
                             <div class="role-timeline-duration">
                                 ${role.isOngoing ? `${Math.ceil((today - role.startDate) / (1000 * 60 * 60 * 24))}d+ (No end date)` : `${durationMonths}mo (${durationDays}d)`}
@@ -3567,8 +3567,8 @@
                         <div class="task-card" style="border-top-color: ${isOverdue ? 'var(--danger)' : statusColor}" onclick="app.editTask('${task.id}')">
                             <div class="task-card-header">
                                 <div class="task-card-title" style="margin-bottom: 12px;">
-                                    ${hasReminder ? `??� ` : ''}${task.title}
-                                    ${isOverdue ? ` ?�` : ''}
+                                    ${hasReminder ? `🔔” ` : ''}${task.title}
+                                    ${isOverdue ? ` ⚠ ` : ''}
                                 </div>
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
                                     <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
@@ -3593,19 +3593,19 @@
                                 ` : ''}
 
                                 <div class="task-card-meta">
-                                    ${task.targetDate ? `<span ${isOverdue ? 'class="overdue-text"' : ''}>${new Date(task.targetDate).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}</span>` : ''}
-                                    ${totalTimeMinutes > 0 ? `<span style="color: var(--adidas-blue); font-weight: 700;">??� ${totalTimeMinutes}m (${totalTimeHours}h)</span>` : ''}
-                                    ${task.updates?.length ? `<span>?? ${task.updates.length}</span>` : ''}
-                                    ${linkedConvCount > 0 ? `<span>??  ${linkedConvCount}</span>` : ''}
+                                    ${task.targetDate ? `<span ${isOverdue ? 'class="overdue-text"' : ''}>🔍… ${new Date(task.targetDate).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}</span>` : ''}
+                                    ${totalTimeMinutes > 0 ? `<span style="color: var(--adidas-blue); font-weight: 700;">⏱️ ${totalTimeMinutes}m (${totalTimeHours}h)</span>` : ''}
+                                    ${task.updates?.length ? `<span>💬 ${task.updates.length}</span>` : ''}
+                                    ${linkedConvCount > 0 ? `<span>🔍  ${linkedConvCount}</span>` : ''}
                                 </div>
                             </div>
 
                             <div class="task-card-footer">
                                 <div class="task-actions" style="gap: 8px;">
-                                    ${task.status !== 'completed' ? `<button class="btn btn-small btn-success" onclick="event.stopPropagation(); app.completeTask('${task.id}')" title="Complete Task">?</button>` : ''}
+                                    ${task.status !== 'completed' ? `<button class="btn btn-small btn-success" onclick="event.stopPropagation(); app.completeTask('${task.id}')" title="Complete Task">✓</button>` : ''}
                                     <button class="btn btn-small btn-primary" onclick="event.stopPropagation(); app.showUpdateModal('${task.id}')" title="Add Update">+</button>
-                                    <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.editTask('${task.id}')" title="Edit Task">??�</button>
-                                    <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteTask('${task.id}')" title="Delete Task">???</button>
+                                    <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.editTask('${task.id}')" title="Edit Task">✏️</button>
+                                    <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteTask('${task.id}')" title="Delete Task">🗑️</button>
                                 </div>
                             </div>
                         </div>
@@ -3665,7 +3665,7 @@
                         <div class="timeline-task-card ${placement}" style="left: ${position}px; border-top-color: ${isOverdue ? 'var(--danger)' : statusColor}; padding-bottom: 45px;" onclick="app.editTask('${task.id}')">
                             <div style="font-weight: 900; font-size: 14px; margin-bottom: 8px; color: var(--text);">
                                 ${task.title}
-                                ${isOverdue ? ` ?�` : ''}
+                                ${isOverdue ? ` ⚠ ` : ''}
                             </div>
                             <div style="display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap;">
                                 ${taskRoles.map(role => {
@@ -3679,10 +3679,10 @@
                             <span class="status-badge" style="padding: 4px 8px; background: ${statusColor}; color: ${task.status === 'in-progress' ? 'var(--primary)' : 'white'}; font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; display: inline-block;">${task.status}</span>
 
                             <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); display: flex; justify-content: center; gap: 6px;">
-                                ${task.status !== 'completed' ? `<button class="btn btn-small btn-success" onclick="event.stopPropagation(); app.completeTask('${task.id}')" title="Complete Task" style="padding: 4px 8px; font-size: 11px;">?</button>` : ''}
+                                ${task.status !== 'completed' ? `<button class="btn btn-small btn-success" onclick="event.stopPropagation(); app.completeTask('${task.id}')" title="Complete Task" style="padding: 4px 8px; font-size: 11px;">✓</button>` : ''}
                                 <button class="btn btn-small btn-primary" onclick="event.stopPropagation(); app.showUpdateModal('${task.id}')" title="Add Update" style="padding: 4px 8px; font-size: 11px;">+</button>
-                                <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.editTask('${task.id}')" title="Edit Task" style="padding: 4px 8px; font-size: 11px;">??�</button>
-                                <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteTask('${task.id}')" title="Delete Task" style="padding: 4px 8px; font-size: 11px;">???�</button>
+                                <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.editTask('${task.id}')" title="Edit Task" style="padding: 4px 8px; font-size: 11px;">✏️</button>
+                                <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteTask('${task.id}')" title="Delete Task" style="padding: 4px 8px; font-size: 11px;">🗑️</button>
                             </div>
                         </div>
                     `;
@@ -3716,8 +3716,8 @@
 
                 const timelineHTML = `
                     <div class="timeline-controls">
-                        <button class="timeline-zoom-btn" onclick="app.zoomTimeline('in')">??+ Zoom In</button>
-                        <button class="timeline-zoom-btn" onclick="app.zoomTimeline('out')">??- Zoom Out</button>
+                        <button class="timeline-zoom-btn" onclick="app.zoomTimeline('in')">🔍+ Zoom In</button>
+                        <button class="timeline-zoom-btn" onclick="app.zoomTimeline('out')">🔍− Zoom Out</button>
                         <div class="timeline-info">
                             ${tasksWithDates.length} tasks | ${Math.ceil(totalDays)} days
                         </div>
@@ -3762,7 +3762,7 @@
             renderTasksKanban(tasks) {
                 const statuses = ['open', 'in-progress', 'completed'];
                 const statusLabels = { 'open': 'Open', 'in-progress': 'In Progress', 'completed': 'Completed' };
-                const statusIcons = { 'open': '?? ', 'in-progress': '?', 'completed': '?' };
+                const statusIcons = { 'open': '🔍 ', 'in-progress': '⚡', 'completed': '✅' };
 
                 const renderKanbanCard = (task) => {
                     const taskRoleIds = task.roleIds || (task.roleId ? [task.roleId] : []);
@@ -3783,7 +3783,7 @@
                              ondragend="app.handleDragEnd(event)">
                             <div class="kanban-card-title">
                                 ${task.title}
-                                ${isOverdue ? ' ?�' : ''}
+                                ${isOverdue ? ' ⚠ ' : ''}
                             </div>
                             ${task.description ? `<div style="font-size: 12px; color: var(--text-light); margin-bottom: 8px; line-height: 1.4;">${task.description.substring(0, 100)}${task.description.length > 100 ? '...' : ''}</div>` : ''}
                             <div class="kanban-card-roles">
@@ -3793,15 +3793,15 @@
                                 }).join('')}
                             </div>
                             <div class="kanban-card-meta">
-                                ${task.targetDate ? `<span ${isOverdue ? 'style="color: var(--danger); font-weight: 900;"' : ''}>${new Date(task.targetDate).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}</span>` : ''}
-                                ${task.timeSpent ? `<span>??� ${task.timeSpent}m</span>` : ''}
-                                ${task.updates?.length ? `<span>?? ${task.updates.length}</span>` : ''}
+                                ${task.targetDate ? `<span ${isOverdue ? 'style="color: var(--danger); font-weight: 900;"' : ''}>🔍… ${new Date(task.targetDate).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}</span>` : ''}
+                                ${task.timeSpent ? `<span>⏱️ ${task.timeSpent}m</span>` : ''}
+                                ${task.updates?.length ? `<span>💬 ${task.updates.length}</span>` : ''}
                             </div>
 
                             <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 8px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); display: flex; justify-content: center; gap: 6px;">
                                 <button class="btn btn-small btn-primary" onclick="event.stopPropagation(); app.showUpdateModal('${task.id}')" title="Add Update" style="padding: 4px 8px; font-size: 11px;">+</button>
-                                <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.editTask('${task.id}')" title="Edit Task" style="padding: 4px 8px; font-size: 11px;">??�</button>
-                                <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteTask('${task.id}')" title="Delete Task" style="padding: 4px 8px; font-size: 11px;">???�</button>
+                                <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.editTask('${task.id}')" title="Edit Task" style="padding: 4px 8px; font-size: 11px;">✏️</button>
+                                <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteTask('${task.id}')" title="Delete Task" style="padding: 4px 8px; font-size: 11px;">🗑️</button>
                             </div>
                         </div>
                     `;
@@ -3862,7 +3862,7 @@
                     swimlanesHTML += `
                         <div class="kanban-swimlane">
                             <div class="kanban-swimlane-header" style="background: linear-gradient(135deg, #FDE428 0%, #FF8A00 100%); color: var(--primary);">
-                                <span style="font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">??� Multiple Roles</span>
+                                <span style="font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">🔔€ Multiple Roles</span>
                                 <span style="font-size: 12px; opacity: 0.9;">${multiRoleTasks.length} task${multiRoleTasks.length !== 1 ? 's' : ''}</span>
                             </div>
                             <div class="kanban-board">
@@ -3952,7 +3952,7 @@
                     swimlanesHTML += `
                         <div class="kanban-swimlane">
                             <div class="kanban-swimlane-header" style="background: var(--surface-light); color: var(--text-light); border: 2px dashed var(--border);">
-                                <span style="font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">? No Role Assigned</span>
+                                <span style="font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">⚪ No Role Assigned</span>
                                 <span style="font-size: 12px; opacity: 0.9;">${noRoleTasks.length} task${noRoleTasks.length !== 1 ? 's' : ''}</span>
                             </div>
                             <div class="kanban-board">
@@ -4115,9 +4115,9 @@
                         const roles = this.data.responsibilities.filter(r => task.roleIds?.includes(r.id) || r.id === task.roleId);
                         results.push({
                             type: 'Task',
-                            icon: '??',
+                            icon: '📋',
                             title: task.title,
-                            subtitle: `${task.status} � ${roles.map(r => r.name).join(', ')}`,
+                            subtitle: `${task.status} • ${roles.map(r => r.name).join(', ')}`,
                             action: () => this.editTask(task.id)
                         });
                     }
@@ -4130,9 +4130,9 @@
                         const role = this.data.responsibilities.find(r => r.id === conv.roleId);
                         results.push({
                             type: 'Conversation',
-                            icon: '??',
+                            icon: '💬',
                             title: conv.title,
-                            subtitle: `${role?.name || 'No Role'} � ${new Date(conv.date).toLocaleDateString()}`,
+                            subtitle: `${role?.name || 'No Role'} • ${new Date(conv.date).toLocaleDateString()}`,
                             action: () => { this.showView('conversations'); setTimeout(() => this.viewConversation(conv.id), 100); }
                         });
                     }
@@ -4145,9 +4145,9 @@
                         const role = this.data.responsibilities.find(r => r.id === meeting.roleId);
                         results.push({
                             type: 'Meeting',
-                            icon: '??�',
+                            icon: '🔍…',
                             title: meeting.title,
-                            subtitle: `${role?.name || 'No Role'} � ${meeting.recurrence}`,
+                            subtitle: `${role?.name || 'No Role'} • ${meeting.recurrence}`,
                             action: () => { this.showView('meetings'); setTimeout(() => this.showMeetingDetail(meeting.id), 100); }
                         });
                     }
@@ -4161,7 +4161,7 @@
                             const meeting = this.data.meetings.find(m => m.id === instance.meetingId);
                             results.push({
                                 type: 'Meeting Notes',
-                                icon: '?? ',
+                                icon: '🔍 ',
                                 title: meeting?.title || 'Meeting',
                                 subtitle: `Notes from ${new Date(instance.date).toLocaleDateString()}`,
                                 action: () => { this.showView('meetings'); setTimeout(() => this.showMeetingDetail(instance.meetingId), 100); }
@@ -4176,7 +4176,7 @@
                     if (roleText.includes(searchTerm)) {
                         results.push({
                             type: 'Role Dimension',
-                            icon: '??',
+                            icon: '🎯',
                             title: role.name,
                             subtitle: role.description,
                             action: () => { this.showView('responsibilities'); setTimeout(() => this.editResponsibility(role.id), 100); }
@@ -4278,18 +4278,18 @@
                             <div style="margin-bottom: 10px;">
                                 <span class="role-badge" style="background: ${role?.color || '#ccc'}">${role?.name || 'Unknown'}</span>
                                 <span style="font-size: 12px; color: var(--text-light); margin-left: 10px;">${new Date(conv.date).toLocaleString()}</span>
-                                ${conv.attachment ? `<span style="font-size: 12px; color: var(--adidas-yellow); margin-left: 10px;">?? ${conv.attachment.name}</span>` : ''}
+                                ${conv.attachment ? `<span style="font-size: 12px; color: var(--adidas-yellow); margin-left: 10px;">📎 ${conv.attachment.name}</span>` : ''}
                             </div>
                             <div style="white-space: pre-wrap; margin-bottom: 10px;">${conv.content}</div>
                             ${conv.tags?.length ? `<div style="margin-bottom: 10px;">${conv.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
                             ${linkedTasks.length > 0 ? `
                                 <div class="related-items" style="margin-top: 10px;">
-                                    <strong style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">??� Linked Tasks:</strong>
+                                    <strong style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">🔔— Linked Tasks:</strong>
                                     <div style="display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px;">
                                         ${linkedTasks.map(t => `
                                             <div style="display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; background: var(--surface-light); border-left: 3px solid ${role?.color || '#ccc'};">
                                                 <span class="related-item" onclick="app.editTask('${t.id}')" style="cursor: pointer;">${t.title}</span>
-                                                <button onclick="app.unlinkConversationFromTask('${conv.id}', '${t.id}')" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 14px;" title="Unlink">�</button>
+                                                <button onclick="app.unlinkConversationFromTask('${conv.id}', '${t.id}')" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 14px;" title="Unlink">×</button>
                                             </div>
                                         `).join('')}
                                     </div>
@@ -4297,7 +4297,7 @@
                             ` : ''}
                             ${related.tasks.length > 0 && !linkedTasks.some(lt => related.tasks.find(rt => rt.id === lt.id)) ? `
                                 <div class="related-items" style="margin-top: 10px; opacity: 0.7;">
-                                    <strong style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">?? AI Suggested Related:</strong>
+                                    <strong style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">🤖 AI Suggested Related:</strong>
                                     ${related.tasks.map(t => `<div class="related-item" onclick="app.editTask('${t.id}')">${t.title}</div>`).join('')}
                                 </div>
                             ` : ''}
@@ -4624,7 +4624,7 @@
                             style="flex: 1; margin-right: 10px; padding: 10px; background: var(--surface-light); border: 1px solid var(--border); color: var(--text);"
                             ${index === 0 ? 'required' : ''}>
                         ${this.current180DayItems.length > 1 ? `
-                            <button type="button" class="btn btn-small btn-danger" onclick="app.remove180DayItem(${index})">�</button>
+                            <button type="button" class="btn btn-small btn-danger" onclick="app.remove180DayItem(${index})">×</button>
                         ` : ''}
                     </div>
                 `).join('');
@@ -4680,12 +4680,12 @@
                     const similarTasks = this.findSimilarTasks(newTitle, newDescription, selectedRoles);
                     if (similarTasks.length > 0) {
                         const taskList = similarTasks.map(t =>
-                            `� ${t.title} (${t.status}) - ${this.data.roleDimensions.filter(r => t.roleIds?.includes(r.id) || r.id === t.roleId).map(r => r.name).join(', ')}`
+                            `• ${t.title} (${t.status}) - ${this.data.roleDimensions.filter(r => t.roleIds?.includes(r.id) || r.id === t.roleId).map(r => r.name).join(', ')}`
                         ).join('\n');
 
                         const proceed = confirm(
-                            `?�️ Similar tasks found:\n\n${taskList}\n\n` +
-                            `?? Recommendation: Consider updating an existing task instead of creating a new one.\n\n` +
+                            `⚠ ï¸ Similar tasks found:\n\n${taskList}\n\n` +
+                            `💡 Recommendation: Consider updating an existing task instead of creating a new one.\n\n` +
                             `Click OK to create a new task anyway, or Cancel to review existing tasks.`
                         );
 
@@ -4986,29 +4986,29 @@
                                 <div class="task-card-title">${meeting.title}</div>
                                 <div class="task-card-meta">
                                     ${role ? `<span style="width: 24px; height: 24px; border-radius: 50%; background: ${role.color}; color: ${role.color === '#FDE428' ? 'var(--primary)' : 'white'}; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 900;" title="${role.name}">${role.name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase()}</span>` : ''}
-                                    <span style="font-size: 11px;">?? ${recurrenceLabel}</span>
+                                    <span style="font-size: 11px;">🔁 ${recurrenceLabel}</span>
                                     <span style="font-size: 11px;">${instances.length} occurrence${instances.length !== 1 ? 's' : ''}</span>
-                                    <span style="font-size: 11px; color: var(--adidas-blue); font-weight: 700;">??� ${avgDuration}min avg</span>
+                                    <span style="font-size: 11px; color: var(--adidas-blue); font-weight: 700;">⏱️ ${avgDuration}min avg</span>
                                 </div>
                                 ${nextMeetingBadge ? `<div style="margin-top: 10px;">${nextMeetingBadge}</div>` : ''}
                             </div>
 
                             <div class="task-card-body">
                                 <div style="font-size: 11px; color: var(--text-light); margin-bottom: 10px;">
-                                    ?? ${meeting.attendees.join(', ')}
+                                    👥 ${meeting.attendees.join(', ')}
                                 </div>
                                 <div style="margin-top: 10px; padding: 10px; background: rgba(253, 228, 40, 0.1); border-left: 2px solid var(--adidas-yellow); font-size: 11px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-                                    <div style="font-weight: 700; margin-bottom: 4px;">? AI Highlight</div>
+                                    <div style="font-weight: 700; margin-bottom: 4px;">✨ AI Highlight</div>
                                     ${aiHighlight}
                                 </div>
                             </div>
 
                             <div class="task-card-footer">
                                 <div class="task-actions" style="gap: 8px;">
-                                    <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.showMeetingSetupModal('${meeting.id}')" title="Edit Details">??</button>
-                                    <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteMeeting('${meeting.id}')" title="Delete Meeting">???</button>
+                                    <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); app.showMeetingSetupModal('${meeting.id}')" title="Edit Details">✏️</button>
+                                    <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); app.deleteMeeting('${meeting.id}')" title="Delete Meeting">🗑️</button>
                                 </div>
-                                <span style="font-size: 10px; color: var(--text-muted);">??  View History</span>
+                                <span style="font-size: 10px; color: var(--text-muted);">🔍  View History</span>
                             </div>
                         </div>
                     `;
@@ -5039,7 +5039,7 @@
                                 <div style="font-size: 13px; color: var(--text-muted);">${meeting.attendees.join(', ')}</div>
                                 <div style="font-size: 12px; color: var(--text-muted);">
                                     ${meeting.recurrence !== 'none' ? meeting.recurrence.charAt(0).toUpperCase() + meeting.recurrence.slice(1) + ' meeting' : 'One-time meeting'}
-                                    ${meeting.nextOccurrence ? ` � Next: ${new Date(meeting.nextOccurrence).toLocaleDateString('en-US', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'})}` : ''}
+                                    ${meeting.nextOccurrence ? ` • Next: ${new Date(meeting.nextOccurrence).toLocaleDateString('en-US', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'})}` : ''}
                                 </div>
                             </div>
                         </div>
@@ -5048,7 +5048,7 @@
                     ${instances.length > 0 ? `
                     <div id="overallAiSummaryContainer_${meetingId}" style="margin-bottom: 20px;">
                         <button class="btn btn-primary" onclick="alert('AI overall summary feature temporarily disabled')" style="width: 100%;">
-                            ? Generate AI Summary Across All Meetings
+                            ✨ Generate AI Summary Across All Meetings
                         </button>
                     </div>
                     ` : ''}
@@ -5056,7 +5056,7 @@
                     ${meeting.nextOccurrence ? `
                     <div style="background: var(--surface-light); border-left: 4px solid var(--adidas-green); padding: 20px; margin-bottom: 20px; border-radius: 6px;">
                         <h4 style="font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                            <span>?? </span> Prepare for Next Meeting
+                            <span>🔍 </span> Prepare for Next Meeting
                             <span style="font-size: 11px; background: var(--adidas-green); color: var(--primary); padding: 4px 8px; border-radius: 4px; font-weight: 900; margin-left: auto;">
                                 ${new Date(meeting.nextOccurrence).toLocaleDateString('en-US', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'})}
                             </span>
@@ -5065,21 +5065,21 @@
                             ${meeting.nextMeetingAgenda ? `
                                 <div style="background: var(--surface); padding: 12px; border-radius: 6px; margin-bottom: 10px; white-space: pre-wrap; font-size: 13px; line-height: 1.6;">${meeting.nextMeetingAgenda}</div>
                                 <div style="display: flex; gap: 10px;">
-                                    <button class="btn btn-small btn-secondary" onclick="app.showEditNextMeetingAgenda('${meetingId}')" style="flex: 1;">??� Edit Agenda</button>
-                                    <button class="btn btn-small btn-danger" onclick="app.clearNextMeetingAgenda('${meetingId}')" style="flex: 1;">???� Clear</button>
+                                    <button class="btn btn-small btn-secondary" onclick="app.showEditNextMeetingAgenda('${meetingId}')" style="flex: 1;">✏️ Edit Agenda</button>
+                                    <button class="btn btn-small btn-danger" onclick="app.clearNextMeetingAgenda('${meetingId}')" style="flex: 1;">🗑️ Clear</button>
                                 </div>
                             ` : `
                                 <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px; font-style: italic;">No agenda prepared yet for the next meeting.</div>
-                                <button class="btn btn-small btn-primary" onclick="app.showEditNextMeetingAgenda('${meetingId}')" style="width: 100%;">??  Prepare Agenda</button>
+                                <button class="btn btn-small btn-primary" onclick="app.showEditNextMeetingAgenda('${meetingId}')" style="width: 100%;">🔍  Prepare Agenda</button>
                             `}
                         </div>
                         <div id="prepAgendaEdit_${meetingId}" style="display: none;">
                             <textarea id="prepAgendaTextarea_${meetingId}"
                                       style="width: 100%; min-height: 150px; padding: 12px; background: var(--surface); border: 2px solid var(--adidas-green); border-radius: 6px; color: var(--text); font-size: 13px; line-height: 1.6; font-family: inherit; resize: vertical; margin-bottom: 10px;"
-                                      placeholder="Enter agenda items for the next meeting...&#10;&#10;� Topic 1&#10;� Topic 2&#10;� Discussion points">${meeting.nextMeetingAgenda || meeting.agendaTemplate || ''}</textarea>
+                                      placeholder="Enter agenda items for the next meeting...&#10;&#10;• Topic 1&#10;• Topic 2&#10;• Discussion points">${meeting.nextMeetingAgenda || meeting.agendaTemplate || ''}</textarea>
                             <div style="display: flex; gap: 10px;">
-                                <button class="btn btn-small btn-primary" onclick="app.saveNextMeetingAgenda('${meetingId}')" style="flex: 1;">?? Save Agenda</button>
-                                <button class="btn btn-small btn-secondary" onclick="app.cancelEditNextMeetingAgenda('${meetingId}')" style="flex: 1;">??� Cancel</button>
+                                <button class="btn btn-small btn-primary" onclick="app.saveNextMeetingAgenda('${meetingId}')" style="flex: 1;">💾 Save Agenda</button>
+                                <button class="btn btn-small btn-secondary" onclick="app.cancelEditNextMeetingAgenda('${meetingId}')" style="flex: 1;">✖️ Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -5095,12 +5095,12 @@
                             <div style="background: var(--surface-light); padding: 15px; margin-bottom: 12px; border-left: 3px solid ${role?.color || 'var(--border)'}; border-radius: 6px; position: relative;">
                                 <button onclick="app.deleteMeetingInstance('${instance.id}')"
                                         style="position: absolute; top: 8px; right: 8px; background: var(--danger); color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; font-weight: 900; z-index: 10;"
-                                        title="Delete this note">???</button>
+                                        title="Delete this note">🗑️</button>
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                                     <div style="font-weight: 700; font-size: 14px;">
                                         ${new Date(instance.date).toLocaleDateString('en-US', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'})}
                                     </div>
-                                    ${instance.duration ? `<div style="background: var(--adidas-blue); color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">??� ${instance.duration}min</div>` : ''}
+                                    ${instance.duration ? `<div style="background: var(--adidas-blue); color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">⏱️ ${instance.duration}min</div>` : ''}
                                 </div>
                                 ${instance.notes ? `
                                 <div style="margin-bottom: 10px;">
@@ -5119,14 +5119,14 @@
                                     <div style="font-weight: 700; font-size: 12px; margin-bottom: 4px; color: var(--text-muted);">Action Items (${instance.actionItems.filter(ai => ai.completed).length}/${instance.actionItems.length} completed):</div>
                                     ${instance.actionItems.slice(0, 3).map(ai => `
                                         <div style="font-size: 12px; margin-bottom: 2px;">
-                                            ${ai.completed ? '?' : '?'} ${ai.text}
+                                            ${ai.completed ? '✅' : '⬜'} ${ai.text}
                                         </div>
                                     `).join('')}
                                     ${instance.actionItems.length > 3 ? `<div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">+${instance.actionItems.length - 3} more</div>` : ''}
                                 </div>
                                 ` : ''}
                                 ${instance.transcript ? `
-                                <div style="font-size: 11px; color: var(--adidas-green); margin-top: 8px;">?? Transcript attached</div>
+                                <div style="font-size: 11px; color: var(--adidas-green); margin-top: 8px;">🔄 Transcript attached</div>
                                 ` : ''}
                                 <button class="btn btn-small btn-secondary" onclick="app.viewMeetingInstance('${instance.id}', true)" style="margin-top: 10px;">View Full Details</button>
                             </div>
@@ -5213,7 +5213,7 @@
                             console.warn('Empty summary generated despite having content');
                             container.innerHTML = `
                                 <div style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                                    <div style="font-weight: 900; color: #92400e; margin-bottom: 8px;">?�️ No Summary Available</div>
+                                    <div style="font-weight: 900; color: #92400e; margin-bottom: 8px;">⚠ ï¸ No Summary Available</div>
                                     <div style="font-size: 13px; color: #78350f;">This meeting has no notes, decisions, or action items yet. Add content to generate a summary.</div>
                                 </div>
                             `;
@@ -5232,8 +5232,8 @@
                         container.innerHTML = `
                             <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; border-left: 4px solid #0ea5e9;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                                    <div style="font-weight: 900; color: #0369a1;">? AI Summary</div>
-                                    <button onclick="app.regenerateMeetingSummary('${instanceId}')" style="background: transparent; border: 1px solid #0ea5e9; color: #0369a1; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">??� Regenerate</button>
+                                    <div style="font-weight: 900; color: #0369a1;">✨ AI Summary</div>
+                                    <button onclick="app.regenerateMeetingSummary('${instanceId}')" style="background: transparent; border: 1px solid #0ea5e9; color: #0369a1; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">🔔„ Regenerate</button>
                                 </div>
                                 <div style="white-space: pre-wrap; line-height: 1.6; font-size: 13px; color: #0f172a;">${escapedSummary}</div>
                             </div>
@@ -5243,9 +5243,9 @@
                         console.error('Error generating summary:', error);
                         container.innerHTML = `
                             <div style="background: #fee2e2; padding: 15px; border-radius: 8px; border-left: 4px solid #ef4444;">
-                                <div style="font-weight: 900; color: #991b1b; margin-bottom: 8px;">? Error Generating Summary</div>
+                                <div style="font-weight: 900; color: #991b1b; margin-bottom: 8px;">⌛ Error Generating Summary</div>
                                 <div style="font-size: 13px; color: #7f1d1d;">${error.message || 'Failed to generate summary'}</div>
-                                <button onclick="app.generateAndShowMeetingSummary('${instanceId}')" style="margin-top: 10px; background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">??� Try Again</button>
+                                <button onclick="app.generateAndShowMeetingSummary('${instanceId}')" style="margin-top: 10px; background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">🔔„ Try Again</button>
                             </div>
                         `;
                     }
@@ -5290,7 +5290,7 @@
                             console.warn('Empty overall summary generated');
                             container.innerHTML = `
                                 <div style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                                    <div style="font-weight: 900; color: #92400e; margin-bottom: 8px;">?�️ No Summary Available</div>
+                                    <div style="font-weight: 900; color: #92400e; margin-bottom: 8px;">⚠ ï¸ No Summary Available</div>
                                     <div style="font-size: 13px; color: #78350f;">No meetings recorded yet or insufficient data to generate summary.</div>
                                 </div>
                             `;
@@ -5309,8 +5309,8 @@
                         container.innerHTML = `
                             <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; border-left: 4px solid #0ea5e9;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                                    <div style="font-weight: 900; color: #0369a1;">? AI Summary Across All Meetings</div>
-                                    <button onclick="app.regenerateOverallSummary('${meetingId}')" style="background: transparent; border: 1px solid #0ea5e9; color: #0369a1; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">??� Regenerate</button>
+                                    <div style="font-weight: 900; color: #0369a1;">✨ AI Summary Across All Meetings</div>
+                                    <button onclick="app.regenerateOverallSummary('${meetingId}')" style="background: transparent; border: 1px solid #0ea5e9; color: #0369a1; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">🔔„ Regenerate</button>
                                 </div>
                                 <div style="white-space: pre-wrap; line-height: 1.6; font-size: 13px; color: #0f172a;">${escapedSummary}</div>
                             </div>
@@ -5320,9 +5320,9 @@
                         console.error('Error generating overall summary:', error);
                         container.innerHTML = `
                             <div style="background: #fee2e2; padding: 15px; border-radius: 8px; border-left: 4px solid #ef4444;">
-                                <div style="font-weight: 900; color: #991b1b; margin-bottom: 8px;">? Error Generating Summary</div>
+                                <div style="font-weight: 900; color: #991b1b; margin-bottom: 8px;">⌛ Error Generating Summary</div>
                                 <div style="font-size: 13px; color: #7f1d1d;">${error.message || 'Failed to generate summary'}</div>
-                                <button onclick="app.generateAndShowOverallSummary('${meetingId}')" style="margin-top: 10px; background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">??� Try Again</button>
+                                <button onclick="app.generateAndShowOverallSummary('${meetingId}')" style="margin-top: 10px; background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">🔔„ Try Again</button>
                             </div>
                         `;
                     }
@@ -5347,7 +5347,7 @@
                     return;
                 }
 
-                container.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--text-muted);">? Generating AI agenda with Gemini...</div>';
+                container.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--text-muted);">✨ Generating AI agenda with Gemini...</div>';
 
                 // Get previous instances for this meeting
                 const previousInstances = this.data.meetingInstances
@@ -5376,7 +5376,7 @@
                 if (openActionItems.length > 0) {
                     agenda += `Follow-up Items:\n`;
                     openActionItems.slice(0, 5).forEach(ai => {
-                        agenda += `� ${ai.text}\n`;
+                        agenda += `• ${ai.text}\n`;
                     });
                 }
 
@@ -5552,7 +5552,7 @@
                             ${!meeting.nextMeetingAgenda ? `
                             <div id="aiAgendaContainer_${meetingId}" style="margin-top: 10px;">
                                 <button type="button" class="btn btn-small btn-secondary" onclick="alert('AI agenda feature temporarily disabled')" style="width: 100%;">
-                                    ? Generate AI Agenda Suggestions
+                                    ✨ Generate AI Agenda Suggestions
                                 </button>
                             </div>
                             ` : ''}
@@ -5585,9 +5585,9 @@
                         <div id="aiSuggestionsSection" style="display: none; margin-top: 20px;"></div>
 
                         <div style="display: flex; gap: 10px; margin-top: 20px;">
-                            <button type="button" class="btn btn-secondary" onclick="app.cancelMeetingInstance('${meetingId}')" style="flex: 1;">??� Cancel</button>
-                            <button type="button" class="btn btn-secondary" onclick="alert('AI Review temporarily disabled. Please complete the meeting to use AI Summary feature.')" style="flex: 1;">??� AI Review & Suggestions</button>
-                            <button type="submit" class="btn btn-primary" style="flex: 1;">? Complete & Save Meeting</button>
+                            <button type="button" class="btn btn-secondary" onclick="app.cancelMeetingInstance('${meetingId}')" style="flex: 1;">✖️ Cancel</button>
+                            <button type="button" class="btn btn-secondary" onclick="alert('AI Review temporarily disabled. Please complete the meeting to use AI Summary feature.')" style="flex: 1;">🔔 AI Review & Suggestions</button>
+                            <button type="submit" class="btn btn-primary" style="flex: 1;">✓ Complete & Save Meeting</button>
                         </div>
                     </form>
                 `;
@@ -5632,7 +5632,7 @@
                     </label>
                     <button type="button"
                             onclick="app.removeActionItem('${actionItemId}')"
-                            style="background: var(--danger); color: white; border: none; border-radius: 4px; padding: 8px 12px; cursor: pointer;">�</button>
+                            style="background: var(--danger); color: white; border: none; border-radius: 4px; padding: 8px 12px; cursor: pointer;">×</button>
                 `;
                 container.appendChild(itemDiv);
             },
@@ -5656,16 +5656,16 @@
                 if (!supportedFormats.includes(fileExtension)) {
                     preview.innerHTML = `
                         <div style="background: #fee2e2; padding: 12px; border-radius: 6px; border-left: 4px solid #ef4444;">
-                            <div style="font-weight: 700; font-size: 13px; color: #991b1b;">? Unsupported File Format</div>
+                            <div style="font-weight: 700; font-size: 13px; color: #991b1b;">⌛ Unsupported File Format</div>
                             <div style="font-size: 12px; color: #7f1d1d; margin-top: 8px;">
                                 File type ".${fileExtension}" is not supported.<br><br>
                                 <strong>Supported formats:</strong><br>
-                                � .txt - Plain text files<br>
-                                � .vtt - Video subtitle files<br>
-                                � .srt - Subtitle files<br><br>
+                                • .txt - Plain text files<br>
+                                • .vtt - Video subtitle files<br>
+                                • .srt - Subtitle files<br><br>
                                 <strong>For .docx files:</strong><br>
                                 1. Open the file in Word<br>
-                                2. Save As ? Plain Text (.txt)<br>
+                                2. Save As → Plain Text (.txt)<br>
                                 3. Upload the .txt version
                             </div>
                         </div>
@@ -5717,12 +5717,12 @@
                     preview.innerHTML = `
                         <div style="background: var(--surface-light); padding: 12px; border-radius: 6px; border-left: 4px solid var(--adidas-green);">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <div style="font-weight: 700; font-size: 13px;">?? ${file.name}</div>
+                                <div style="font-weight: 700; font-size: 13px;">🔄 ${file.name}</div>
                                 <button type="button" onclick="app.removeTranscript()" style="background: var(--danger); color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px;">Remove</button>
                             </div>
-                            <div style="font-size: 11px; color: var(--text-muted);">${wordCount} words � ${(file.size / 1024).toFixed(1)} KB</div>
+                            <div style="font-size: 11px; color: var(--text-muted);">${wordCount} words • ${(file.size / 1024).toFixed(1)} KB</div>
                             <div style="margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 4px; max-height: 150px; overflow-y: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;">${transcriptText.substring(0, 500)}${transcriptText.length > 500 ? '...' : ''}</div>
-                            <button type="button" onclick="alert('AI extraction feature temporarily disabled')" class="btn btn-small btn-secondary" style="margin-top: 10px; width: 100%;">? AI Extract Action Items & Key Points</button>
+                            <button type="button" onclick="alert('AI extraction feature temporarily disabled')" class="btn btn-small btn-secondary" style="margin-top: 10px; width: 100%;">✨ AI Extract Action Items & Key Points</button>
                         </div>
                     `;
                 };
@@ -5730,12 +5730,12 @@
                 reader.onerror = () => {
                     preview.innerHTML = `
                         <div style="background: #fee2e2; padding: 12px; border-radius: 6px; border-left: 4px solid #ef4444;">
-                            <div style="font-weight: 700; font-size: 13px; color: #991b1b;">? Error Reading File</div>
+                            <div style="font-weight: 700; font-size: 13px; color: #991b1b;">⌛ Error Reading File</div>
                             <div style="font-size: 12px; color: #7f1d1d; margin-top: 8px;">
                                 Could not read the file. Please try:<br>
-                                � Converting to plain text (.txt)<br>
-                                � Checking file permissions<br>
-                                � Using a different file
+                                • Converting to plain text (.txt)<br>
+                                • Checking file permissions<br>
+                                • Using a different file
                             </div>
                         </div>
                     `;
@@ -5797,7 +5797,7 @@
                     notesTextarea.value = `Transcript Summary:\n\n${lines.slice(0, 10).join('\n')}\n\n[Full transcript: ${this.currentTranscript.fileName}]`;
                 }
 
-                alert(`Extraction Complete!\n\n� ${potentialActions.length} potential action items found\n� ${potentialDecisions.length} decisions found\n\nReview and edit as needed.`);
+                alert(`Extraction Complete!\n\n• ${potentialActions.length} potential action items found\n• ${potentialDecisions.length} decisions found\n\nReview and edit as needed.`);
             },
 
             analyzeBeforeComplete(meetingId) {
@@ -5818,7 +5818,7 @@
                 const suggestionsSection = document.getElementById('aiSuggestionsSection');
                 suggestionsSection.innerHTML = `
                     <div style="background: #dcfce7; padding: 15px; border-radius: 8px; border-left: 4px solid #16a34a;">
-                        <div style="font-weight: 900; margin-bottom: 8px; color: #15803d;">? Ready to Complete</div>
+                        <div style="font-weight: 900; margin-bottom: 8px; color: #15803d;">✅ Ready to Complete</div>
                         <div style="color: #166534; line-height: 1.6; font-size: 13px;">
                             Your meeting notes have been reviewed. You can now complete this meeting.
                         </div>
@@ -5987,42 +5987,42 @@
                 const content = `
                     <div id="aiSummaryContainer_${instanceId}" style="margin-bottom: 20px;">
                         <button class="btn btn-primary" onclick="app.generateAndShowMeetingSummary('${instanceId}')" style="width: 100%;">
-                            ? Generate AI Summary
+                            ✨ Generate AI Summary
                         </button>
                     </div>
 
                     <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 700; margin-bottom: 8px;">??� Date</div>
+                        <div style="font-weight: 700; margin-bottom: 8px;">🔍… Date</div>
                         <div>${new Date(instance.date).toLocaleString('en-US', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</div>
                     </div>
 
                     ${instance.duration ? `
                     <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 700; margin-bottom: 8px;">??� Duration</div>
+                        <div style="font-weight: 700; margin-bottom: 8px;">⏱️ Duration</div>
                         <div style="display: inline-block; background: var(--adidas-blue); color: white; padding: 6px 12px; border-radius: 4px; font-weight: 700;">${instance.duration} minutes (${Math.round(instance.duration / 60 * 10) / 10}h)</div>
                     </div>
                     ` : ''}
 
                     <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 700; margin-bottom: 8px;">?? Agenda</div>
+                        <div style="font-weight: 700; margin-bottom: 8px;">📋 Agenda</div>
                         <div style="white-space: pre-wrap; background: var(--surface-light); padding: 12px; border-radius: 6px;">${instance.agenda}</div>
                     </div>
 
                     <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 700; margin-bottom: 8px;">??  Meeting Notes</div>
+                        <div style="font-weight: 700; margin-bottom: 8px;">🔍  Meeting Notes</div>
                         <div style="white-space: pre-wrap; background: var(--surface-light); padding: 12px; border-radius: 6px; line-height: 1.6;">${instance.notes}</div>
                     </div>
 
                     ${instance.decisions ? `
                     <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 700; margin-bottom: 8px;">?? Key Decisions</div>
+                        <div style="font-weight: 700; margin-bottom: 8px;">🎯 Key Decisions</div>
                         <div style="white-space: pre-wrap; background: var(--surface-light); padding: 12px; border-radius: 6px;">${instance.decisions}</div>
                     </div>
                     ` : ''}
 
                     ${instance.actionItems && instance.actionItems.length > 0 ? `
                     <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 700; margin-bottom: 8px;">? Action Items</div>
+                        <div style="font-weight: 700; margin-bottom: 8px;">✅ Action Items</div>
                         <div style="background: var(--surface-light); padding: 12px; border-radius: 6px;">
                             ${instance.actionItems.map(ai => `
                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
@@ -6036,7 +6036,7 @@
 
                     ${relatedTasks.length > 0 ? `
                     <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 700; margin-bottom: 8px;">?? Created Tasks</div>
+                        <div style="font-weight: 700; margin-bottom: 8px;">📋 Created Tasks</div>
                         <div style="background: var(--surface-light); padding: 12px; border-radius: 6px;">
                             ${relatedTasks.map(t => `
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding: 8px; background: var(--background); border-radius: 4px;">
@@ -6050,7 +6050,7 @@
 
                     ${instance.transcript ? `
                     <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 700; margin-bottom: 8px;">?? Meeting Transcript</div>
+                        <div style="font-weight: 700; margin-bottom: 8px;">🔄 Meeting Transcript</div>
                         <div style="background: var(--surface-light); padding: 12px; border-radius: 6px; border-left: 4px solid var(--adidas-green);">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                 <div>
@@ -6105,10 +6105,10 @@
 
                 const content = `
                     <div style="margin-bottom: 20px;">
-                        <button class="btn btn-secondary" onclick="app.viewMeetingInstance('${instanceId}')" style="margin-bottom: 15px;">? Back to Meeting Details</button>
-                        <h3 style="margin-bottom: 10px;">?? ${instance.transcript.fileName}</h3>
+                        <button class="btn btn-secondary" onclick="app.viewMeetingInstance('${instanceId}')" style="margin-bottom: 15px;">→ Back to Meeting Details</button>
+                        <h3 style="margin-bottom: 10px;">🔄 ${instance.transcript.fileName}</h3>
                         <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">
-                            ${meeting ? meeting.title : 'Meeting'} � ${new Date(instance.date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})} �
+                            ${meeting ? meeting.title : 'Meeting'} • ${new Date(instance.date).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})} •
                             ${instance.transcript.content.split(/\s+/).length} words
                         </div>
                     </div>
@@ -6118,8 +6118,8 @@
                     </div>
 
                     <div style="margin-top: 20px; display: flex; gap: 10px;">
-                        <button class="btn btn-secondary" onclick="app.viewMeetingInstance('${instanceId}')">? Back to Meeting</button>
-                        <button class="btn btn-secondary" onclick="app.downloadTranscript('${instanceId}')">? Download Transcript</button>
+                        <button class="btn btn-secondary" onclick="app.viewMeetingInstance('${instanceId}')">→ Back to Meeting</button>
+                        <button class="btn btn-secondary" onclick="app.downloadTranscript('${instanceId}')">⬇ Download Transcript</button>
                     </div>
                 `;
 
@@ -6330,7 +6330,7 @@
                             size: file.size,
                             content: e.target.result
                         };
-                        document.getElementById('attachedFileName').textContent = `?? ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+                        document.getElementById('attachedFileName').textContent = `📎 ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
 
                         // If it's a text file, auto-populate content if empty
                         if (file.type.includes('text') && !document.getElementById('conversationContent').value) {
@@ -6527,7 +6527,7 @@
                     if (!task.updates) task.updates = [];
                     task.updates.unshift({
                         id: 'update_' + Date.now(),
-                        content: `? Auto-completed when role dimension "${resp.name}" was closed`,
+                        content: `✅ Auto-completed when role dimension "${resp.name}" was closed`,
                         timestamp: completionDate
                     });
                 });
@@ -6598,7 +6598,7 @@
                 // Display total time
                 const totalTimeHTML = totalMinutes > 0 ? `
                     <div style="background: var(--surface-light); border-left: 4px solid var(--adidas-blue); padding: 12px; border-radius: 6px;">
-                        <div style="font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">??� Total Time Logged</div>
+                        <div style="font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">⏱️ Total Time Logged</div>
                         <div style="font-size: 24px; font-weight: 900; color: var(--adidas-blue);">${totalMinutes} min (${totalHours}h)</div>
                         <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">${task.timeEntries.length} time entr${task.timeEntries.length === 1 ? 'y' : 'ies'}</div>
                     </div>
@@ -6610,7 +6610,7 @@
                     <div style="padding: 12px; background: var(--bg); border-radius: 6px; margin-bottom: 10px; border-left: 3px solid ${update.timeSpent > 0 ? 'var(--adidas-blue)' : 'var(--primary)'};">
                         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
                             <div style="font-size: 11px; color: var(--text-light);">${new Date(update.timestamp).toLocaleString('en-US', {month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'})}</div>
-                            ${update.timeSpent > 0 ? `<div style="background: var(--adidas-blue); color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">??� ${update.timeSpent} min</div>` : ''}
+                            ${update.timeSpent > 0 ? `<div style="background: var(--adidas-blue); color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">⏱️ ${update.timeSpent} min</div>` : ''}
                         </div>
                         <div style="font-size: 13px; line-height: 1.6; white-space: pre-wrap;">${update.content}</div>
                     </div>
@@ -6767,7 +6767,7 @@
                     if (!task.updates) task.updates = [];
                     task.updates.unshift({
                         id: 'update_' + Date.now(),
-                        content: `? Task completed: ${comment}`,
+                        content: `✅ Task completed: ${comment}`,
                         timestamp: new Date().toISOString()
                     });
                 }
@@ -6794,8 +6794,8 @@
                 if (similar.length > 0) {
                     document.getElementById('duplicateWarning').innerHTML = `
                         <div class="alert alert-warning">
-                            <strong>?�️ Similar tasks found:</strong><br>
-                            ${similar.map(t => `� ${t.title}`).join('<br>')}
+                            <strong>⚠ ï¸ Similar tasks found:</strong><br>
+                            ${similar.map(t => `• ${t.title}`).join('<br>')}
                             <br><small>Consider updating an existing task instead?</small>
                         </div>
                     `;
@@ -6989,7 +6989,7 @@
                         if (notifEnabled && Notification.permission === 'granted') {
                             new Notification('Task Reminder', {
                                 body: rem.message,
-                                icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">?</text></svg>'
+                                icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">⏰</text></svg>'
                             });
                         }
                     }
