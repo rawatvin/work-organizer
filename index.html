@@ -4196,11 +4196,14 @@
                     return;
                 }
 
-                const resultsHTML = results.slice(0, 20).map(result => `
+                // Store results for click handling
+                this.currentSearchResults = results;
+
+                const resultsHTML = results.slice(0, 20).map((result, index) => `
                     <div style="padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.2s;"
                          onmouseover="this.style.background='var(--background)'"
                          onmouseout="this.style.background='transparent'"
-                         onclick='${result.action.toString().replace(/'/g, "\\'")}'>
+                         onclick="app.executeSearchResult(${index})">
                         <div style="display: flex; align-items: center; gap: 10px;">
                             <span style="font-size: 20px;">${result.icon}</span>
                             <div style="flex: 1;">
@@ -4221,6 +4224,14 @@
                 ` : '');
 
                 container.style.display = 'block';
+            },
+
+            executeSearchResult(index) {
+                if (this.currentSearchResults && this.currentSearchResults[index]) {
+                    this.hideSearchResults();
+                    document.getElementById('globalSearch').value = '';
+                    this.currentSearchResults[index].action();
+                }
             },
 
             showSearchResults() {
