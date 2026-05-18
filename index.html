@@ -1897,10 +1897,6 @@
                 <span class="nav-icon"></span>
                 <span class="nav-label">Meetings</span>
             </div>
-            <div class="nav-item" onclick="app.showView('analytics')">
-                <span class="nav-icon"></span>
-                <span class="nav-label">Analytics</span>
-            </div>
             <div class="nav-item" onclick="app.showView('settings')">
                 <span class="nav-icon"></span>
                 <span class="nav-label">Settings</span>
@@ -1926,7 +1922,7 @@
             </div>
             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px;">
                 <div style="position: relative;">
-                    <input type="text" id="globalSearch" placeholder=" Search tasks, meetings, conversations, notes..."
+                    <input type="text" id="globalSearch" placeholder="Search tasks, meetings, conversations, notes..."
                            style="width: 100%; padding: 10px 15px; border: 2px solid var(--border); border-radius: 25px; background: var(--surface); color: var(--text); font-size: 14px;"
                            oninput="app.performGlobalSearch(this.value)"
                            onfocus="app.showSearchResults()"
@@ -2013,28 +2009,6 @@
             </div>
 
             <div id="meetingsList"></div>
-        </div>
-
-        <!-- Analytics View -->
-        <div id="analytics" class="view">
-            <h2 style="margin-bottom: 20px;">Analytics & Insights</h2>
-
-            <div class="card">
-                <h3>Time Distribution by Role Dimension</h3>
-                <div class="chart-container">
-                    <canvas id="roleTimeChart"></canvas>
-                </div>
-            </div>
-
-            <div class="card" style="margin-top: 20px;">
-                <h3>Task Statistics</h3>
-                <div id="taskStats"></div>
-            </div>
-
-            <div class="card" style="margin-top: 20px;">
-                <h3>Automation Opportunities</h3>
-                <div id="automationSuggestions"></div>
-            </div>
         </div>
 
         <!-- Settings View -->
@@ -2363,7 +2337,7 @@
             dashboardLayout: ['stats', 'progress', 'meeting-analytics', 'roles-tasks', 'activity'],
             draggedWidget: null,
             modalNavigationStack: [],
-            sidebarNavOrder: ['dashboard', 'responsibilities', 'tasks', 'conversations', 'meetings', 'analytics', 'settings'],
+            sidebarNavOrder: ['dashboard', 'responsibilities', 'tasks', 'conversations', 'meetings', 'settings'],
             draggedNavItem: null,
             creatingInstanceFrom: null,
 
@@ -2406,7 +2380,6 @@
                     'tasks': { icon: '□', label: 'Tasks' },
                     'conversations': { icon: '◇', label: 'Conversations' },
                     'meetings': { icon: '△', label: 'Meetings' },
-                    'analytics': { icon: '▽', label: 'Analytics' },
                     'settings': { icon: '●', label: 'Settings' }
                 };
 
@@ -2557,7 +2530,6 @@
                 if (viewName === 'tasks') this.renderTasks();
                 if (viewName === 'conversations') this.renderConversations();
                 if (viewName === 'meetings') this.renderMeetings();
-                if (viewName === 'analytics') this.renderAnalytics();
                 if (viewName === 'settings') this.renderSettings();
             },
 
