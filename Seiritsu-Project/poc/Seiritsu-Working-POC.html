@@ -316,73 +316,87 @@
             font-size: 0.8125rem;
         }
 
-        .roadmap-timeline-container {
-            overflow-x: auto;
-            overflow-y: auto;
-            max-height: 600px;
-            border: 1px solid var(--gray-200);
-            border-radius: 4px;
-            background: var(--gray-50);
+        /* Roadmap Timeline Styles */
+        #roadmapTimeline {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .roadmap-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: white;
+            border-bottom: 2px solid var(--gray-300);
+            display: flex;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .roadmap-row-label-header {
+            min-width: 300px;
+            width: 300px;
+            padding: 1rem;
+            font-weight: 700;
+            border-right: 2px solid var(--gray-300);
+            background: var(--gray-100);
+            position: sticky;
+            left: 0;
+            z-index: 21;
         }
 
         .roadmap-timeline-header {
             display: flex;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: white;
-            border-bottom: 2px solid var(--gray-300);
+            flex: 1;
             min-height: 60px;
         }
 
-        .roadmap-label-column {
-            min-width: 250px;
-            width: 250px;
-            background: white;
-            position: sticky;
-            left: 0;
-            z-index: 11;
-            border-right: 2px solid var(--gray-300);
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--gray-600);
-        }
-
-        .roadmap-time-columns {
-            display: flex;
-            flex: 1;
-            min-width: 0;
-        }
-
-        .roadmap-time-cell {
-            flex: 1;
-            min-width: 60px;
+        .roadmap-time-column {
+            min-width: 80px;
             padding: 0.5rem;
             text-align: center;
             border-right: 1px solid var(--gray-200);
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--gray-600);
+            color: var(--gray-700);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .roadmap-time-cell.current {
-            background: rgba(0, 120, 212, 0.05);
+        .roadmap-time-column.current {
+            background: rgba(0, 120, 212, 0.08);
             border-right: 2px solid var(--primary);
         }
 
-        .roadmap-timeline-body {
-            position: relative;
+        .roadmap-time-column.today-marker {
+            background: rgba(0, 120, 212, 0.15);
+            border-left: 3px solid var(--primary);
+            border-right: 3px solid var(--primary);
+        }
+
+        .roadmap-swimlane {
+            border-bottom: 2px solid var(--gray-400);
+        }
+
+        .roadmap-swimlane-header {
+            background: var(--gray-200);
+            padding: 0.75rem 1rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            border-bottom: 1px solid var(--gray-300);
+            position: sticky;
+            left: 0;
+            z-index: 10;
         }
 
         .roadmap-row {
             display: flex;
-            min-height: 60px;
+            min-height: 70px;
             border-bottom: 1px solid var(--gray-200);
-            position: relative;
             background: white;
+            position: relative;
         }
 
         .roadmap-row:hover {
@@ -390,76 +404,94 @@
         }
 
         .roadmap-row-label {
-            min-width: 250px;
-            width: 250px;
+            min-width: 300px;
+            width: 300px;
             padding: 0.75rem 1rem;
-            position: sticky;
-            left: 0;
-            background: inherit;
-            z-index: 9;
             border-right: 2px solid var(--gray-300);
             display: flex;
             flex-direction: column;
             justify-content: center;
+            gap: 0.25rem;
+            position: sticky;
+            left: 0;
+            background: inherit;
+            z-index: 9;
         }
 
         .roadmap-row-title {
             font-weight: 600;
             font-size: 0.875rem;
             color: var(--gray-800);
-            margin-bottom: 0.25rem;
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
-        .roadmap-row-subtitle {
+        .roadmap-row-meta {
             font-size: 0.75rem;
             color: var(--gray-600);
         }
 
-        .roadmap-row-timeline {
-            display: flex;
+        .roadmap-row-chart {
             flex: 1;
             position: relative;
-            min-width: 0;
+            display: flex;
         }
 
-        .roadmap-grid-cell {
-            flex: 1;
-            min-width: 60px;
+        .roadmap-time-cell {
+            min-width: 80px;
             border-right: 1px solid var(--gray-200);
             position: relative;
         }
 
-        .roadmap-grid-cell.current {
-            background: rgba(0, 120, 212, 0.02);
-            border-right: 2px solid var(--primary);
+        .roadmap-time-cell.current {
+            background: rgba(0, 120, 212, 0.03);
+        }
+
+        .roadmap-time-cell.today-marker {
+            border-right: 3px solid var(--primary);
         }
 
         .roadmap-bar {
             position: absolute;
-            height: 32px;
+            height: 36px;
             top: 50%;
             transform: translateY(-50%);
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
-            padding: 0 0.5rem;
+            padding: 0 0.75rem;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             color: white;
             overflow: hidden;
             white-space: nowrap;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            z-index: 5;
         }
 
         .roadmap-bar:hover {
-            transform: translateY(-50%) scale(1.02);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            z-index: 5;
+            transform: translateY(-50%) scale(1.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            z-index: 15;
+        }
+
+        .roadmap-bar.in-progress-indicator {
+            border-right: 4px dashed white;
+        }
+
+        .roadmap-bar.status-submitted {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+        }
+
+        .roadmap-bar.status-under-review {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+        }
+
+        .roadmap-bar.status-approved {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
         }
 
         .roadmap-bar.status-committed {
@@ -471,20 +503,43 @@
         }
 
         .roadmap-bar.status-completed {
-            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
         }
 
-        .roadmap-bar.funding-market {
-            border-top: 3px solid #107c10;
+        .roadmap-bar.status-on-hold {
+            background: linear-gradient(135deg, #fd7e14 0%, #e8590c 100%);
         }
 
-        .roadmap-bar.funding-global {
-            border-top: 3px solid #ffaa44;
+        .roadmap-bar.status-rejected {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
         }
 
         .roadmap-bar-content {
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .today-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .today-label {
+            position: absolute;
+            top: -25px;
+            left: -20px;
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 700;
             white-space: nowrap;
         }
 
@@ -742,7 +797,7 @@
         <div class="nav-content">
             <div class="nav-tab active" onclick="switchView('dashboard')">Dashboard</div>
             <div class="nav-tab" onclick="switchView('kanban')">Kanban View</div>
-            <div class="nav-tab" onclick="switchView('timeline')">Timeline</div>
+            <div class="nav-tab" onclick="switchView('roadmap')">Roadmap Timeline</div>
             <div class="nav-tab" onclick="switchView('all-requests')">All Requests</div>
             <div class="nav-tab" onclick="switchView('data-management')">Data Management</div>
             <div class="nav-tab" onclick="switchView('settings')">Settings</div>
@@ -882,29 +937,65 @@
             </div>
         </div>
 
-        <!-- Timeline View -->
-        <div id="timeline" class="view">
+        <!-- Roadmap Timeline View -->
+        <div id="roadmap" class="view">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">Roadmap Timeline (Weekly View)</h2>
-                </div>
-                <div class="filters">
-                    <div class="filter-group">
-                        <label class="filter-label">Funding Source</label>
-                        <select class="filter-select" id="timelineFundingFilter" onchange="renderTimeline()">
-                            <option value="">All Sources</option>
-                        </select>
+                    <h2 class="card-title">Roadmap Timeline</h2>
+                    <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                        <!-- Timeline Type Toggle -->
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <span style="font-size: 0.875rem; color: var(--gray-600);">Timeline:</span>
+                            <button class="btn btn-sm" id="btnPlanned" onclick="setTimelineType('planned')" style="background: var(--primary); color: white;">Planned</button>
+                            <button class="btn btn-sm btn-outline" id="btnActual" onclick="setTimelineType('actual')">Actual</button>
+                        </div>
+
+                        <!-- View Mode Toggle -->
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <span style="font-size: 0.875rem; color: var(--gray-600);">View:</span>
+                            <button class="btn btn-sm" id="btnChronological" onclick="setViewMode('chronological')" style="background: var(--primary); color: white;">Chronological</button>
+                            <button class="btn btn-sm btn-outline" id="btnSwimlanes" onclick="setViewMode('swimlanes')">Swimlanes</button>
+                        </div>
+
+                        <!-- Zoom Controls -->
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <span style="font-size: 0.875rem; color: var(--gray-600);">Zoom:</span>
+                            <button class="btn btn-sm btn-outline" onclick="setTimelineZoom('year')">Year</button>
+                            <button class="btn btn-sm btn-outline" onclick="setTimelineZoom('quarter')">Quarter</button>
+                            <button class="btn btn-sm" onclick="setTimelineZoom('month')" style="background: var(--primary); color: white;" id="btnZoomMonth">Month</button>
+                            <button class="btn btn-sm btn-outline" onclick="setTimelineZoom('week')">Week</button>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="filters" style="margin-bottom: 1rem;">
                     <div class="filter-group">
                         <label class="filter-label">Status</label>
-                        <select class="filter-select" id="timelineStatusFilter" onchange="renderTimeline()">
-                            <option value="">All Statuses</option>
+                        <select class="filter-select" id="roadmapStatusFilter" multiple size="3" onchange="renderRoadmap()">
                         </select>
                     </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Market</label>
+                        <select class="filter-select" id="roadmapMarketFilter" multiple size="3" onchange="renderRoadmap()">
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Tech Lead</label>
+                        <select class="filter-select" id="roadmapTechLeadFilter" multiple size="3" onchange="renderRoadmap()">
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Countries</label>
+                        <select class="filter-select" id="roadmapCountriesFilter" multiple size="3" onchange="renderRoadmap()">
+                        </select>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="clearRoadmapFilters()" style="align-self: flex-end;">Clear Filters</button>
                 </div>
-                <div class="roadmap-timeline-container" id="timelineView">
-                    <div class="roadmap-timeline-header" id="timelineHeader"></div>
-                    <div class="roadmap-timeline-body" id="timelineBody"></div>
+
+                <!-- Roadmap Container -->
+                <div id="roadmapContainer" style="overflow-x: auto; overflow-y: auto; max-height: 70vh; border: 1px solid var(--gray-200); border-radius: 4px; background: white; position: relative;">
+                    <div id="roadmapTimeline"></div>
                 </div>
             </div>
         </div>
@@ -1590,8 +1681,8 @@
                 case 'kanban':
                     renderKanban();
                     break;
-                case 'timeline':
-                    renderTimeline();
+                case 'roadmap':
+                    renderRoadmap();
                     break;
                 case 'all-requests':
                     renderAllRequests();
@@ -1888,120 +1979,275 @@
             });
         }
 
-        // Timeline Rendering
-        async function populateTimelineFilters() {
-            // Get field configurations
-            const statusField = await getField('status');
-            const fundingField = await getField('fundingSource');
 
-            const statusFilter = document.getElementById('timelineStatusFilter');
-            const fundingFilter = document.getElementById('timelineFundingFilter');
+        // Roadmap Timeline Rendering
+        let roadmapState = {
+            timelineType: 'planned', // 'planned' or 'actual'
+            viewMode: 'chronological', // 'chronological' or 'swimlanes'
+            zoomLevel: 'month', // 'year', 'quarter', 'month', 'week'
+            scrollPosition: 0
+        };
 
-            // Populate status filter
-            if (statusField?.options) {
-                const currentValue = statusFilter.value;
-                statusFilter.innerHTML = '<option value="">All Statuses</option>';
-                statusField.options.forEach(status => {
-                    statusFilter.innerHTML += `<option value="${status}">${status}</option>`;
-                });
-                statusFilter.value = currentValue;
-            }
+        function setTimelineType(type) {
+            roadmapState.timelineType = type;
 
-            // Populate funding filter
-            if (fundingField?.options) {
-                const currentValue = fundingFilter.value;
-                fundingFilter.innerHTML = '<option value="">All Sources</option>';
-                fundingField.options.forEach(source => {
-                    fundingFilter.innerHTML += `<option value="${source}">${source} Funded</option>`;
-                });
-                fundingFilter.value = currentValue;
-            }
+            // Update button styles
+            document.getElementById('btnPlanned').className = type === 'planned' ? 'btn btn-sm' : 'btn btn-sm btn-outline';
+            document.getElementById('btnPlanned').style.background = type === 'planned' ? 'var(--primary)' : '';
+            document.getElementById('btnPlanned').style.color = type === 'planned' ? 'white' : '';
+
+            document.getElementById('btnActual').className = type === 'actual' ? 'btn btn-sm' : 'btn btn-sm btn-outline';
+            document.getElementById('btnActual').style.background = type === 'actual' ? 'var(--primary)' : '';
+            document.getElementById('btnActual').style.color = type === 'actual' ? 'white' : '';
+
+            renderRoadmap();
         }
 
-        async function renderTimeline() {
-            // Populate filters on first load
-            await populateTimelineFilters();
+        function setViewMode(mode) {
+            roadmapState.viewMode = mode;
 
+            // Update button styles
+            document.getElementById('btnChronological').className = mode === 'chronological' ? 'btn btn-sm' : 'btn btn-sm btn-outline';
+            document.getElementById('btnChronological').style.background = mode === 'chronological' ? 'var(--primary)' : '';
+            document.getElementById('btnChronological').style.color = mode === 'chronological' ? 'white' : '';
+
+            document.getElementById('btnSwimlanes').className = mode === 'swimlanes' ? 'btn btn-sm' : 'btn btn-sm btn-outline';
+            document.getElementById('btnSwimlanes').style.background = mode === 'swimlanes' ? 'var(--primary)' : '';
+            document.getElementById('btnSwimlanes').style.color = mode === 'swimlanes' ? 'white' : '';
+
+            renderRoadmap();
+        }
+
+        function setTimelineZoom(level) {
+            roadmapState.zoomLevel = level;
+
+            // Update button styles
+            const buttons = {
+                'year': document.querySelectorAll('.card-header button')[6],
+                'quarter': document.querySelectorAll('.card-header button')[7],
+                'month': document.getElementById('btnZoomMonth'),
+                'week': document.querySelectorAll('.card-header button')[9]
+            };
+
+            Object.keys(buttons).forEach(key => {
+                const btn = buttons[key];
+                if (btn) {
+                    btn.className = key === level ? 'btn btn-sm' : 'btn btn-sm btn-outline';
+                    btn.style.background = key === level ? 'var(--primary)' : '';
+                    btn.style.color = key === level ? 'white' : '';
+                }
+            });
+
+            renderRoadmap();
+        }
+
+        async function renderRoadmap() {
             let requests = await getAllRequests();
 
-            const fundingFilter = document.getElementById('timelineFundingFilter').value;
-            const statusFilter = document.getElementById('timelineStatusFilter').value;
+            // Get filter values
+            const statusFilter = Array.from(document.getElementById('roadmapStatusFilter').selectedOptions).map(o => o.value);
+            const marketFilter = Array.from(document.getElementById('roadmapMarketFilter').selectedOptions).map(o => o.value);
+            const techLeadFilter = Array.from(document.getElementById('roadmapTechLeadFilter').selectedOptions).map(o => o.value);
+            const countriesFilter = Array.from(document.getElementById('roadmapCountriesFilter').selectedOptions).map(o => o.value);
 
-            // Filter: only show items that have both start and end dates
-            requests = requests.filter(r => r.expectedStartDate && r.expectedEndDate);
-
-            if (fundingFilter) {
-                requests = requests.filter(r => r.fundingSource === fundingFilter);
+            // Apply filters
+            if (statusFilter.length > 0) {
+                requests = requests.filter(r => statusFilter.includes(r.status));
             }
-            if (statusFilter) {
-                requests = requests.filter(r => r.status === statusFilter);
+            if (marketFilter.length > 0) {
+                requests = requests.filter(r => marketFilter.includes(r.market));
+            }
+            if (techLeadFilter.length > 0) {
+                requests = requests.filter(r => techLeadFilter.includes(r.globalTechLead));
+            }
+            if (countriesFilter.length > 0) {
+                requests = requests.filter(r => {
+                    const reqCountries = (r.countries || '').split(',').map(c => c.trim());
+                    return countriesFilter.some(f => reqCountries.includes(f));
+                });
             }
 
-            // Sort by start date
-            requests.sort((a, b) => new Date(a.expectedStartDate) - new Date(b.expectedStartDate));
-
-            const timelineHeader = document.getElementById('timelineHeader');
-            const timelineBody = document.getElementById('timelineBody');
+            // Filter based on timeline type
+            const dateField = roadmapState.timelineType === 'planned' ? 'expected' : 'actual';
+            requests = requests.filter(r => r[`${dateField}StartDate`]);
 
             if (requests.length === 0) {
-                timelineHeader.innerHTML = '';
-                timelineBody.innerHTML = '<div class="alert alert-info" style="margin: 1rem;">No items with dates match the current filters.</div>';
+                document.getElementById('roadmapTimeline').innerHTML = '<div class="alert alert-info" style="margin: 2rem;">No requests match the current filters.</div>';
                 return;
             }
 
-            // Calculate time range from actual request dates
-            const allDates = requests.flatMap(r => [new Date(r.expectedStartDate), new Date(r.expectedEndDate)]);
-            const minDate = new Date(Math.min(...allDates));
-            const maxDate = new Date(Math.max(...allDates));
+            // Calculate date range (today ± 1 month by default)
+            const today = new Date();
+            const defaultStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+            const defaultEnd = new Date(today.getFullYear(), today.getMonth() + 2, 0);
 
-            // Generate weekly timeline
-            const weeks = generateWeeks(minDate, maxDate);
+            // Find actual min/max dates from requests
+            const allDates = requests.flatMap(r => {
+                const dates = [];
+                if (r[`${dateField}StartDate`]) dates.push(new Date(r[`${dateField}StartDate`]));
+                if (r[`${dateField}EndDate`]) dates.push(new Date(r[`${dateField}EndDate`]));
+                return dates;
+            });
 
-            // Render header
-            renderTimelineHeader(weeks);
+            const minDate = allDates.length > 0 ? new Date(Math.min(...allDates, defaultStart)) : defaultStart;
+            const maxDate = allDates.length > 0 ? new Date(Math.max(...allDates, defaultEnd)) : defaultEnd;
 
-            // Render body
-            renderTimelineBody(requests, weeks);
+            // Generate time periods
+            const timePeriods = generateTimePeriods(minDate, maxDate, roadmapState.zoomLevel);
+
+            // Populate filters if empty
+            await populateRoadmapFilters();
+
+            // Render based on view mode
+            if (roadmapState.viewMode === 'chronological') {
+                renderChronologicalView(requests, timePeriods, dateField);
+            } else {
+                renderSwimlanesView(requests, timePeriods, dateField);
+            }
         }
 
-        function generateWeeks(minDate, maxDate) {
-            const weeks = [];
-            const now = new Date();
+        async function populateRoadmapFilters() {
+            const requests = await getAllRequests();
 
-            // Start from Monday of the week containing minDate
-            const start = new Date(minDate);
-            const dayOfWeek = start.getDay();
-            const daysToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-            start.setDate(start.getDate() - daysToMonday);
-            start.setHours(0, 0, 0, 0);
-
-            // End on Sunday of the week containing maxDate
-            const end = new Date(maxDate);
-            const daysToSunday = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
-            end.setDate(end.getDate() + daysToSunday);
-            end.setHours(23, 59, 59, 999);
-
-            let current = new Date(start);
-            while (current <= end) {
-                const weekStart = new Date(current);
-                const weekEnd = new Date(current);
-                weekEnd.setDate(weekEnd.getDate() + 6);
-                weekEnd.setHours(23, 59, 59, 999);
-
-                const weekNum = getWeekNumber(weekStart);
-                const monthLabel = weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-                weeks.push({
-                    label: `W${weekNum}\n${monthLabel}`,
-                    start: weekStart,
-                    end: weekEnd,
-                    isCurrent: now >= weekStart && now <= weekEnd
+            // Populate status filter
+            const statusField = await getField('status');
+            const statusFilter = document.getElementById('roadmapStatusFilter');
+            if (statusFilter.options.length === 0 && statusField?.options) {
+                statusField.options.forEach(status => {
+                    const option = document.createElement('option');
+                    option.value = status;
+                    option.textContent = status;
+                    statusFilter.appendChild(option);
                 });
-
-                current.setDate(current.getDate() + 7);
             }
 
-            return weeks;
+            // Populate market filter
+            const marketField = await getField('market');
+            const marketFilter = document.getElementById('roadmapMarketFilter');
+            if (marketFilter.options.length === 0 && marketField?.options) {
+                marketField.options.forEach(market => {
+                    const option = document.createElement('option');
+                    option.value = market;
+                    option.textContent = market;
+                    marketFilter.appendChild(option);
+                });
+            }
+
+            // Populate tech lead filter
+            const techLeadFilter = document.getElementById('roadmapTechLeadFilter');
+            if (techLeadFilter.options.length === 0) {
+                const techLeads = [...new Set(requests.map(r => r.globalTechLead).filter(Boolean))].sort();
+                techLeads.forEach(lead => {
+                    const option = document.createElement('option');
+                    option.value = lead;
+                    option.textContent = lead;
+                    techLeadFilter.appendChild(option);
+                });
+            }
+
+            // Populate countries filter
+            const countriesFilter = document.getElementById('roadmapCountriesFilter');
+            if (countriesFilter.options.length === 0) {
+                const countries = [...new Set(requests.flatMap(r => (r.countries || '').split(',').map(c => c.trim())).filter(Boolean))].sort();
+                countries.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country;
+                    option.textContent = country;
+                    countriesFilter.appendChild(option);
+                });
+            }
+        }
+
+        function clearRoadmapFilters() {
+            document.getElementById('roadmapStatusFilter').selectedIndex = -1;
+            document.getElementById('roadmapMarketFilter').selectedIndex = -1;
+            document.getElementById('roadmapTechLeadFilter').selectedIndex = -1;
+            document.getElementById('roadmapCountriesFilter').selectedIndex = -1;
+            renderRoadmap();
+        }
+
+        function generateTimePeriods(startDate, endDate, zoom) {
+            const periods = [];
+            const now = new Date();
+            let current = new Date(startDate);
+
+            if (zoom === 'year') {
+                current = new Date(current.getFullYear(), 0, 1);
+                while (current <= endDate) {
+                    const year = current.getFullYear();
+                    const periodStart = new Date(year, 0, 1);
+                    const periodEnd = new Date(year, 11, 31, 23, 59, 59);
+
+                    periods.push({
+                        label: `${year}`,
+                        start: periodStart,
+                        end: periodEnd,
+                        isCurrent: now >= periodStart && now <= periodEnd
+                    });
+
+                    current = new Date(year + 1, 0, 1);
+                }
+            } else if (zoom === 'quarter') {
+                const startQuarter = Math.floor(current.getMonth() / 3);
+                current = new Date(current.getFullYear(), startQuarter * 3, 1);
+
+                while (current <= endDate) {
+                    const quarter = Math.floor(current.getMonth() / 3) + 1;
+                    const year = current.getFullYear();
+                    const periodStart = new Date(year, (quarter - 1) * 3, 1);
+                    const periodEnd = new Date(year, quarter * 3, 0, 23, 59, 59);
+
+                    periods.push({
+                        label: `Q${quarter}\n${year}`,
+                        start: periodStart,
+                        end: periodEnd,
+                        isCurrent: now >= periodStart && now <= periodEnd
+                    });
+
+                    current = new Date(year, quarter * 3, 1);
+                }
+            } else if (zoom === 'month') {
+                current = new Date(current.getFullYear(), current.getMonth(), 1);
+
+                while (current <= endDate) {
+                    const periodStart = new Date(current.getFullYear(), current.getMonth(), 1);
+                    const periodEnd = new Date(current.getFullYear(), current.getMonth() + 1, 0, 23, 59, 59);
+
+                    periods.push({
+                        label: current.toLocaleDateString('en-US', { month: 'short', year: '2-digit' }),
+                        start: periodStart,
+                        end: periodEnd,
+                        isCurrent: now >= periodStart && now <= periodEnd
+                    });
+
+                    current = new Date(current.getFullYear(), current.getMonth() + 1, 1);
+                }
+            } else if (zoom === 'week') {
+                // Start from Monday
+                const dayOfWeek = current.getDay();
+                const daysToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+                current.setDate(current.getDate() - daysToMonday);
+
+                while (current <= endDate) {
+                    const periodStart = new Date(current);
+                    const periodEnd = new Date(current);
+                    periodEnd.setDate(periodEnd.getDate() + 6);
+                    periodEnd.setHours(23, 59, 59);
+
+                    const weekNum = getWeekNumber(periodStart);
+
+                    periods.push({
+                        label: `W${weekNum}\n${periodStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
+                        start: periodStart,
+                        end: periodEnd,
+                        isCurrent: now >= periodStart && now <= periodEnd
+                    });
+
+                    current.setDate(current.getDate() + 7);
+                }
+            }
+
+            return periods;
         }
 
         function getWeekNumber(date) {
@@ -2012,78 +2258,158 @@
             return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
         }
 
-        function renderTimelineHeader(weeks) {
-            const header = document.getElementById('timelineHeader');
-            header.innerHTML = `
-                <div class="roadmap-label-column">Project / Request</div>
-                <div class="roadmap-time-columns">
-                    ${weeks.map(week => `
-                        <div class="roadmap-time-cell ${week.isCurrent ? 'current' : ''}" style="white-space: pre-line;">${week.label}</div>
-                    `).join('')}
+        function renderChronologicalView(requests, timePeriods, dateField) {
+            // Sort by start date
+            requests.sort((a, b) => new Date(a[`${dateField}StartDate`]) - new Date(b[`${dateField}StartDate`]));
+
+            const container = document.getElementById('roadmapTimeline');
+
+            // Render header
+            let html = `
+                <div class="roadmap-header">
+                    <div class="roadmap-row-label-header">Request</div>
+                    <div class="roadmap-timeline-header">
+                        ${timePeriods.map(period => `
+                            <div class="roadmap-time-column ${period.isCurrent ? 'current' : ''}" style="white-space: pre-line;">
+                                ${period.label}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Render rows
+            requests.forEach(request => {
+                html += renderRoadmapRow(request, timePeriods, dateField);
+            });
+
+            container.innerHTML = html;
+
+            // Add today line
+            addTodayMarker(timePeriods, container);
+        }
+
+        function renderSwimlanesView(requests, timePeriods, dateField) {
+            // Group by market
+            const swimlanes = {};
+            requests.forEach(request => {
+                const lane = request.market || 'Unassigned';
+                if (!swimlanes[lane]) swimlanes[lane] = [];
+                swimlanes[lane].push(request);
+            });
+
+            // Sort each swimlane
+            Object.keys(swimlanes).forEach(lane => {
+                swimlanes[lane].sort((a, b) => new Date(a[`${dateField}StartDate`]) - new Date(b[`${dateField}StartDate`]));
+            });
+
+            const container = document.getElementById('roadmapTimeline');
+
+            // Render header
+            let html = `
+                <div class="roadmap-header">
+                    <div class="roadmap-row-label-header">Request</div>
+                    <div class="roadmap-timeline-header">
+                        ${timePeriods.map(period => `
+                            <div class="roadmap-time-column ${period.isCurrent ? 'current' : ''}" style="white-space: pre-line;">
+                                ${period.label}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Render swimlanes
+            Object.keys(swimlanes).sort().forEach(lane => {
+                html += `<div class="roadmap-swimlane">`;
+                html += `<div class="roadmap-swimlane-header">${lane} (${swimlanes[lane].length})</div>`;
+
+                swimlanes[lane].forEach(request => {
+                    html += renderRoadmapRow(request, timePeriods, dateField);
+                });
+
+                html += `</div>`;
+            });
+
+            container.innerHTML = html;
+
+            // Add today line
+            addTodayMarker(timePeriods, container);
+        }
+
+        function renderRoadmapRow(request, timePeriods, dateField) {
+            const startDate = new Date(request[`${dateField}StartDate`]);
+            const endDate = request[`${dateField}EndDate`] ? new Date(request[`${dateField}EndDate`]) : null;
+            const hasEndDate = !!endDate;
+
+            // If no end date, use planned end date for visual
+            const displayEndDate = endDate || (request.expectedEndDate ? new Date(request.expectedEndDate) : new Date(startDate.getTime() + 30 * 24 * 60 * 60 * 1000));
+
+            // Calculate bar position
+            const timelineStart = timePeriods[0].start.getTime();
+            const timelineEnd = timePeriods[timePeriods.length - 1].end.getTime();
+            const totalDuration = timelineEnd - timelineStart;
+
+            const barStart = Math.max(startDate.getTime(), timelineStart);
+            const barEnd = Math.min(displayEndDate.getTime(), timelineEnd);
+
+            const leftPercent = ((barStart - timelineStart) / totalDuration) * 100;
+            const widthPercent = Math.max(((barEnd - barStart) / totalDuration) * 100, 0.5);
+
+            const statusClass = request.status.toLowerCase().replace(/\s+/g, '-');
+            const inProgressClass = !hasEndDate ? 'in-progress-indicator' : '';
+
+            return `
+                <div class="roadmap-row">
+                    <div class="roadmap-row-label">
+                        <div class="roadmap-row-title" title="${request.requestId}: ${request.request}">
+                            ${request.requestId}: ${request.request}
+                        </div>
+                        <div class="roadmap-row-meta">
+                            ${request.globalTechLead || 'No owner'} • ${request.market}
+                        </div>
+                    </div>
+                    <div class="roadmap-row-chart">
+                        ${timePeriods.map(period => `
+                            <div class="roadmap-time-cell ${period.isCurrent ? 'current' : ''}"></div>
+                        `).join('')}
+                        <div class="roadmap-bar status-${statusClass} ${inProgressClass}"
+                             style="left: ${leftPercent}%; width: ${widthPercent}%;"
+                             onclick="editRequest(${request.id})"
+                             title="${request.requestId}: ${request.request}&#10;${request[`${dateField}StartDate`]} to ${request[`${dateField}EndDate`] || 'In Progress'}&#10;Status: ${request.status}">
+                            <div class="roadmap-bar-content">${request.requestId}</div>
+                        </div>
+                    </div>
                 </div>
             `;
         }
 
-        function renderTimelineBody(requests, weeks) {
-            const body = document.getElementById('timelineBody');
+        function addTodayMarker(timePeriods, container) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
 
-            // Calculate timeline range in milliseconds
-            const timelineStart = weeks[0].start.getTime();
-            const timelineEnd = weeks[weeks.length - 1].end.getTime();
-            const totalDuration = timelineEnd - timelineStart;
+            // Find which period contains today
+            const timelineStart = timePeriods[0].start.getTime();
+            const timelineEnd = timePeriods[timePeriods.length - 1].end.getTime();
 
-            body.innerHTML = requests.map(request => {
-                const startDate = new Date(request.expectedStartDate);
-                const endDate = new Date(request.expectedEndDate);
+            if (today.getTime() >= timelineStart && today.getTime() <= timelineEnd) {
+                const totalDuration = timelineEnd - timelineStart;
+                const todayOffset = ((today.getTime() - timelineStart) / totalDuration) * 100;
 
-                // Calculate bar position as percentage of total timeline
-                const barStartTime = Math.max(startDate.getTime(), timelineStart);
-                const barEndTime = Math.min(endDate.getTime(), timelineEnd);
+                const rows = container.querySelectorAll('.roadmap-row-chart');
+                rows.forEach(row => {
+                    const marker = document.createElement('div');
+                    marker.className = 'today-line';
+                    marker.style.left = `${todayOffset}%`;
 
-                const leftPercent = ((barStartTime - timelineStart) / totalDuration) * 100;
-                const widthPercent = Math.max(((barEndTime - barStartTime) / totalDuration) * 100, 0.5);
+                    const label = document.createElement('div');
+                    label.className = 'today-label';
+                    label.textContent = 'TODAY';
+                    marker.appendChild(label);
 
-                const statusClass = request.status.toLowerCase().replace(/\s+/g, '-');
-                const fundingClass = request.fundingSource ? `funding-${request.fundingSource.toLowerCase()}` : '';
-
-                const durationDays = Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-
-                return `
-                    <div class="roadmap-row">
-                        <div class="roadmap-row-label">
-                            <div class="roadmap-row-title" title="${request.requestId}: ${request.request}">
-                                ${request.requestId}: ${request.request}
-                            </div>
-                            <div class="roadmap-row-subtitle">
-                                ${request.globalTechLead || 'No owner'} • ${request.market}
-                            </div>
-                        </div>
-                        <div class="roadmap-row-timeline">
-                            ${weeks.map(week => `
-                                <div class="roadmap-grid-cell ${week.isCurrent ? 'current' : ''}"></div>
-                            `).join('')}
-                            <div class="roadmap-bar status-${statusClass} ${fundingClass}"
-                                 style="left: ${leftPercent}%; width: ${widthPercent}%;"
-                                 onclick="editRequest(${request.id})"
-                                 title="${request.requestId}: ${request.request}&#10;${request.expectedStartDate} to ${request.expectedEndDate}&#10;Status: ${request.status}&#10;Duration: ${durationDays} days">
-                                <div class="roadmap-bar-content">${request.requestId}</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function calculateDelay(request) {
-            if (!request.expectedEndDate) return null;
-
-            const expectedEnd = new Date(request.expectedEndDate);
-            const actualEnd = request.actualEndDate ? new Date(request.actualEndDate) : new Date();
-
-            const diffTime = actualEnd - expectedEnd;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            return diffDays;
+                    row.appendChild(marker);
+                });
+            }
         }
 
         // All Requests Rendering
