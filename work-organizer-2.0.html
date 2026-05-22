@@ -2032,6 +2032,10 @@
                 <button class="btn btn-danger" onclick="app.clearAllData()">Clear All Data</button>
             </div>
         </div>
+
+        <div id="help" class="view">
+            <div id="helpContent"></div>
+        </div>
     </div>
 
     <!-- Task Modal -->
@@ -2337,7 +2341,7 @@
             dashboardLayout: ['stats', 'progress', 'meeting-analytics', 'roles-tasks', 'activity'],
             draggedWidget: null,
             modalNavigationStack: [],
-            sidebarNavOrder: ['dashboard', 'responsibilities', 'tasks', 'conversations', 'meetings', 'settings'],
+            sidebarNavOrder: ['dashboard', 'responsibilities', 'tasks', 'conversations', 'meetings', 'settings', 'help'],
             draggedNavItem: null,
             creatingInstanceFrom: null,
 
@@ -2366,6 +2370,11 @@
                 const saved = localStorage.getItem('sidebarNavOrder');
                 if (saved) {
                     this.sidebarNavOrder = JSON.parse(saved);
+                    // Migration: Add 'help' if it doesn't exist in saved order
+                    if (!this.sidebarNavOrder.includes('help')) {
+                        this.sidebarNavOrder.push('help');
+                        this.saveSidebarOrder();
+                    }
                 }
             },
 
@@ -2380,7 +2389,8 @@
                     'tasks': { icon: '□', label: 'Tasks' },
                     'conversations': { icon: '◇', label: 'Conversations' },
                     'meetings': { icon: '△', label: 'Meetings' },
-                    'settings': { icon: '●', label: 'Settings' }
+                    'settings': { icon: '●', label: 'Settings' },
+                    'help': { icon: '?', label: 'Help' }
                 };
 
                 const currentView = document.querySelector('.view.active')?.id || 'dashboard';
@@ -2581,6 +2591,7 @@
                 if (viewName === 'conversations') this.renderConversations();
                 if (viewName === 'meetings') this.renderMeetings();
                 if (viewName === 'settings') this.renderSettings();
+                if (viewName === 'help') this.renderHelp();
             },
 
             renderAll() {
@@ -4507,6 +4518,231 @@
             renderSettings() {
                 const notifEnabled = localStorage.getItem('notificationsEnabled') === 'true';
                 document.getElementById('enableNotifications').checked = notifEnabled;
+            },
+
+            renderHelp() {
+                const helpHTML = `
+                    <h2 style="margin-bottom: 20px;">Work Organizer 2.0 - Help & Documentation</h2>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Getting Started</h3>
+                        <p style="margin-bottom: 15px; color: var(--text-light); line-height: 1.8;">
+                            Work Organizer 2.0 is a comprehensive management tool for tracking your various role dimensions,
+                            tasks, meetings, and conversations. All your data is stored privately in your browser's localStorage.
+                        </p>
+                        <div style="background: var(--surface-light); padding: 15px; border-radius: 6px; border-left: 4px solid var(--adidas-blue);">
+                            <strong style="color: var(--adidas-blue);">Quick Start:</strong>
+                            <ol style="margin: 10px 0 0 20px; line-height: 2;">
+                                <li>Create your <strong>Role Dimensions</strong> (e.g., Product Manager, Team Lead)</li>
+                                <li>Define 180-day strategic plans for each role</li>
+                                <li>Add <strong>Tasks</strong> and assign them to role dimensions</li>
+                                <li>Schedule <strong>Recurring Meetings</strong> and track instances</li>
+                                <li>Log time spent and track your progress</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Dashboard & Analytics</h3>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>Total Time Tracked:</strong> Shows combined hours from tasks and meetings</li>
+                            <li><strong>Role Dimension Overview:</strong> See progress and time invested per role</li>
+                            <li><strong>Meeting Analytics:</strong> Track meeting time by type and role</li>
+                            <li><strong>Activity Feed:</strong> Recent updates, tasks, and conversations</li>
+                            <li><strong>Drag to Reorder:</strong> Customize your dashboard layout by dragging widgets</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Role Dimensions</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;">
+                            Role dimensions represent your different professional responsibilities. Each role has:
+                        </p>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>180-Day Strategic Plan:</strong> Break down long-term goals into actionable items</li>
+                            <li><strong>Progress Tracking:</strong> Check off completed goals</li>
+                            <li><strong>Time Investment:</strong> See total hours spent on this role</li>
+                            <li><strong>Color Coding:</strong> Visual identification across the app</li>
+                            <li><strong>Line Manager:</strong> Track who you report to for this role</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Task Management</h3>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>Multiple Views:</strong> Grid, Timeline, and Kanban board views</li>
+                            <li><strong>Multi-Role Assignment:</strong> Assign tasks to multiple role dimensions</li>
+                            <li><strong>Status Tracking:</strong> Not Started, In Progress, Completed</li>
+                            <li><strong>Task Updates:</strong> Add progress notes with time logging</li>
+                            <li><strong>Quick Update:</strong> Fast progress tracking from task list</li>
+                            <li><strong>Tags & Priority:</strong> Organize and filter tasks</li>
+                            <li><strong>Target Dates:</strong> Set deadlines and see them on timeline</li>
+                            <li><strong>Reminders:</strong> Get browser notifications</li>
+                        </ul>
+                        <div style="background: var(--surface-light); padding: 12px; border-radius: 6px; margin-top: 15px;">
+                            <strong style="color: var(--adidas-blue);">TIP:</strong>
+                            <span style="color: var(--text-light);">Always log time when adding task updates - it helps track your actual time investment!</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Meeting Management</h3>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>Recurring Patterns:</strong> Daily, Weekly, Bi-weekly, Monthly</li>
+                            <li><strong>Meeting Types:</strong> 1:1, Team, Strategic, Operational, Client</li>
+                            <li><strong>Instance Tracking:</strong> Record each meeting occurrence with notes</li>
+                            <li><strong>Action Items:</strong> Create tasks directly from meeting notes</li>
+                            <li><strong>Duration Tracking:</strong> Log actual meeting length</li>
+                            <li><strong>Meeting Prep:</strong> Add preparation notes before meetings</li>
+                            <li><strong>Analytics:</strong> See meeting time by type and role dimension</li>
+                        </ul>
+                        <div style="background: var(--surface-light); padding: 12px; border-radius: 6px; margin-top: 15px;">
+                            <strong style="color: var(--adidas-blue);">TIP:</strong>
+                            <span style="color: var(--text-light);">Record meeting instances to track actual time spent in meetings!</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Conversations</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;">
+                            Track important conversations, decisions, and notes:
+                        </p>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>Link to Tasks:</strong> Connect conversations to related tasks</li>
+                            <li><strong>Link to Roles:</strong> Associate with role dimensions</li>
+                            <li><strong>Tags:</strong> Organize conversations by topic</li>
+                            <li><strong>File Attachments:</strong> Attach documents and images</li>
+                            <li><strong>Rich Content:</strong> Store detailed notes and context</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Time Tracking</h3>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;">
+                            Comprehensive time tracking helps you understand where your time goes:
+                        </p>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>Task Time:</strong> Log time when adding task updates</li>
+                            <li><strong>Meeting Time:</strong> Tracked via meeting instance duration</li>
+                            <li><strong>Dashboard Total:</strong> Combined view of all work hours</li>
+                            <li><strong>Role Analytics:</strong> Time investment per role dimension</li>
+                            <li><strong>Historical Data:</strong> All your time entries are preserved</li>
+                        </ul>
+                        <div style="background: var(--bg); padding: 15px; border-radius: 6px; margin-top: 15px; border: 1px solid var(--border);">
+                            <div style="color: var(--adidas-yellow); font-weight: 900; margin-bottom: 10px;">HOW TIME TRACKING WORKS:</div>
+                            <div style="line-height: 2; color: var(--text-light);">
+                                1. <strong>Add task updates</strong> with time spent (in minutes)<br>
+                                2. <strong>Record meeting instances</strong> with actual duration<br>
+                                3. View <strong>total time</strong> in dashboard stats card<br>
+                                4. See <strong>time per role</strong> in Role Dimension Overview<br>
+                                5. All time data is <strong>automatically aggregated</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">AI Integration</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;">
+                            Gemini AI integration provides intelligent assistance (requires API key):
+                        </p>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>Meeting Summaries:</strong> Generate summaries from transcripts</li>
+                            <li><strong>Action Item Extraction:</strong> Automatically identify tasks</li>
+                            <li><strong>Smart Insights:</strong> Get suggestions and recommendations</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Data Management</h3>
+                        <div style="background: var(--danger); color: white; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-weight: 700;">
+                            IMPORTANT WARNING: All data is stored in your browser's localStorage. If you clear browser data, everything will be lost!
+                        </div>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>Local Storage:</strong> Data never leaves your browser</li>
+                            <li><strong>Private:</strong> Each user has their own separate workspace</li>
+                            <li><strong>Export:</strong> Download backup as JSON file (use the export button in header)</li>
+                            <li><strong>Import:</strong> Restore from backup file</li>
+                            <li><strong>No Server:</strong> Completely client-side application</li>
+                        </ul>
+                        <div style="background: var(--surface-light); padding: 12px; border-radius: 6px; margin-top: 15px;">
+                            <strong style="color: var(--adidas-blue);">BEST PRACTICE:</strong>
+                            <span style="color: var(--text-light);">Export your data weekly to have recent backups!</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Tips & Tricks</h3>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>Drag Navigation:</strong> Reorder sidebar items by dragging</li>
+                            <li><strong>Drag Dashboard:</strong> Reorder dashboard widgets</li>
+                            <li><strong>Timeline View:</strong> See tasks by date in visual timeline</li>
+                            <li><strong>Kanban Board:</strong> Drag tasks between status columns</li>
+                            <li><strong>Quick Actions:</strong> Right-click or long-press for context menus</li>
+                            <li><strong>Keyboard:</strong> Use Enter to submit forms, Escape to close modals</li>
+                            <li><strong>Search & Filter:</strong> Use tags and filters to find content quickly</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Browser Compatibility</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;">
+                            Works best on modern browsers:
+                        </p>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li><strong>Chrome/Edge:</strong> Recommended (best performance)</li>
+                            <li><strong>Firefox:</strong> Fully supported</li>
+                            <li><strong>Safari:</strong> Supported</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="background: linear-gradient(135deg, var(--surface) 0%, var(--surface-light) 100%); border: 2px solid var(--adidas-yellow);">
+                        <h3 style="color: var(--adidas-yellow);">What's New in Version 2.0</h3>
+                        <div style="line-height: 2; color: var(--text-light);">
+                            <strong style="color: var(--adidas-green);">Hours Tracking Fix (May 2026)</strong>
+                            <ul style="margin: 10px 0 0 20px;">
+                                <li>Task time entries now properly reflected in dashboard</li>
+                                <li>Dashboard "Total Time Tracked" includes both task and meeting hours</li>
+                                <li>Time invested display per role in Role Dimension Overview</li>
+                                <li>Improved role cards layout (2 columns for better symmetry)</li>
+                                <li>Automatic migration of historical time data</li>
+                                <li>Role-based time attribution for better analytics</li>
+                            </ul>
+                            <br>
+                            <strong style="color: var(--adidas-blue);">📊 Enhanced Dashboard</strong>
+                            <ul style="margin: 10px 0 0 20px;">
+                                <li>Unified time tracking across tasks and meetings</li>
+                                <li>Role analytics with time investment</li>
+                                <li>Better visual organization and symmetry</li>
+                                <li>Real-time activity feed</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--adidas-yellow);">Need More Help?</h3>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;">
+                            If you have questions or encounter issues:
+                        </p>
+                        <ul style="margin: 10px 0 0 20px; line-height: 2; color: var(--text-light);">
+                            <li>Check the <strong>Settings</strong> view for configuration options</li>
+                            <li>Export your data regularly as backup</li>
+                            <li>Try refreshing the page if something looks wrong</li>
+                            <li>Clear browser cache if you experience issues</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="text-align: center; background: var(--primary); border: 2px solid var(--adidas-yellow);">
+                        <h3 style="color: var(--adidas-yellow); margin-bottom: 10px;">Ready to Get Started?</h3>
+                        <p style="color: var(--text-light); margin-bottom: 20px;">
+                            Start by creating your first Role Dimension and defining your 180-day plan!
+                        </p>
+                        <button class="btn btn-primary" onclick="app.showView('responsibilities')" style="background: var(--adidas-yellow); color: var(--primary); font-weight: 900;">
+                            CREATE ROLE DIMENSION
+                        </button>
+                    </div>
+                `;
+
+                document.getElementById('helpContent').innerHTML = helpHTML;
             },
 
             showTaskModal(taskId = null) {
