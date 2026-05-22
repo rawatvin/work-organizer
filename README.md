@@ -1,4 +1,4 @@
-# Work Organizer
+# Work Organizer 2.0
 
 A complete management tool for your various role dimensions, tasks and recurring meetings with an Adidas-inspired dark theme.
 
@@ -8,14 +8,60 @@ A complete management tool for your various role dimensions, tasks and recurring
 
 ## ✨ Features
 
-- **Role Dimensions Management**: Define and track your different professional roles with 180-day plans
-- **Task Management**: Create, organize, and track tasks across multiple views (Grid, Timeline, Kanban)
-- **Recurring Meetings**: Schedule and track recurring meetings with notes and action items
-- **Conversation Tracking**: Link conversations to specific tasks and roles
-- **AI Integration**: Gemini AI integration for meeting summaries and insights
-- **Time Tracking**: Track time spent on tasks and updates
-- **Multiple Views**: Switch between different visualization modes
-- **Dark Theme**: Professional Adidas-inspired design
+### 📊 Dashboard & Analytics
+- **Comprehensive Dashboard**: Real-time overview of all your work activities
+- **Time Tracking Dashboard**: See total hours invested across tasks and meetings
+- **Role Dimension Analytics**: View time invested per role with progress tracking
+- **Meeting Analytics**: Track meeting time by type and role dimension
+- **Activity Feed**: Recent updates, tasks, and conversations in one place
+
+### 🎯 Role Dimensions Management
+- Define and track your different professional roles with 180-day strategic plans
+- Track progress with interactive checkboxes
+- View time invested per role dimension
+- Color-coded role identification
+
+### ✅ Task Management
+- Create, organize, and track tasks across multiple views (Grid, Timeline, Kanban)
+- Multi-role task assignment
+- Task updates with time logging
+- Quick update modal for fast progress tracking
+- Task completion with reflection notes
+- Tags and priority management
+- Linked conversations and meeting notes
+
+### 📅 Meeting Management
+- Schedule and track recurring meetings (daily, weekly, bi-weekly, monthly)
+- Record meeting instances with notes and action items
+- Track meeting duration and time investment
+- Link meetings to role dimensions
+- Meeting preparation and action item tracking
+- Meeting analytics by type and role
+
+### 💬 Conversation Tracking
+- Link conversations to specific tasks and roles
+- Add tags for easy organization
+- Attach files and images to conversations
+- Track related content across your workspace
+
+### ⏱️ Time Tracking
+- Comprehensive time tracking for tasks and meetings
+- Dashboard shows total hours across all work
+- Role-based time analytics
+- Historical data migration for existing entries
+- Time entries linked to tasks and roles
+
+### 🤖 AI Integration
+- Gemini AI integration for meeting summaries and insights
+- Automated meeting note analysis
+- Smart suggestions and automation recommendations
+
+### 🎨 Design & Experience
+- Professional Adidas-inspired dark theme
+- Responsive design for all screen sizes
+- Customizable dashboard widget layout (drag to reorder)
+- Smooth animations and transitions
+- Accessible and intuitive interface
 
 ## 📱 How to Use
 
@@ -59,7 +105,26 @@ Built with:
 - **Use Tags** to categorize tasks
 - **Set Target Dates** to see tasks on the timeline view
 - **Add Updates** to track progress on tasks
+- **Log Time** when adding task updates to track your hours
+- **Record Meeting Instances** to track meeting time and notes
 - **Export regularly** to backup your data
+- **Drag Dashboard Widgets** to customize your layout
+
+## 🆕 Latest Updates (v2.0)
+
+### Hours Tracking Fix (May 2026)
+- ✅ Fixed: Task time entries now properly reflected in dashboard
+- ✅ Dashboard "Total Time Tracked" now includes both task and meeting hours
+- ✅ Added time invested display per role in Role Dimension Overview
+- ✅ Improved role cards layout (2 columns for better symmetry)
+- ✅ Automatic migration of historical time data
+- ✅ Role-based time attribution for better analytics
+
+### Key Features
+- **Unified Time Tracking**: See all your work hours (tasks + meetings) in one place
+- **Role Analytics**: Understand time investment across your different roles
+- **Data Migration**: Historical data automatically synced on first load
+- **Improved Dashboard**: Better visual organization and symmetry
 
 ## 🤝 Sharing with Team
 
