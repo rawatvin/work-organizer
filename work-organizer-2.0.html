@@ -2491,6 +2491,56 @@
                     if (!this.data.deletions) {
                         this.data.deletions = [];
                     }
+                    // Initialize timeEntries if not present
+                    if (!this.data.timeEntries) {
+                        this.data.timeEntries = [];
+                    }
+
+                    // Migration: Sync task timeEntries to global timeEntries
+                    // Only run this once by checking if we need migration
+                    let needsMigration = false;
+                    this.data.tasks.forEach(task => {
+                        if (task.timeEntries && task.timeEntries.length > 0) {
+                            // Check if any of this task's time entries are missing from global
+                            task.timeEntries.forEach(taskEntry => {
+                                const existsInGlobal = this.data.timeEntries.some(e =>
+                                    e.taskId === task.id && e.date === taskEntry.date && e.duration === taskEntry.duration
+                                );
+                                if (!existsInGlobal) {
+                                    needsMigration = true;
+                                }
+                            });
+                        }
+                    });
+
+                    // Perform migration if needed
+                    if (needsMigration) {
+                        this.data.tasks.forEach(task => {
+                            if (task.timeEntries && task.timeEntries.length > 0) {
+                                task.timeEntries.forEach(taskEntry => {
+                                    // Check if this entry already exists in global
+                                    const existsInGlobal = this.data.timeEntries.some(e =>
+                                        e.taskId === task.id && e.date === taskEntry.date && e.duration === taskEntry.duration
+                                    );
+
+                                    if (!existsInGlobal) {
+                                        const taskRoleIds = task.roleIds || (task.roleId ? [task.roleId] : []);
+                                        const primaryRoleId = taskRoleIds[0] || null;
+                                        this.data.timeEntries.push({
+                                            id: taskEntry.id + '_migrated',
+                                            roleId: primaryRoleId,
+                                            taskId: task.id,
+                                            duration: taskEntry.duration,
+                                            date: taskEntry.date,
+                                            notes: taskEntry.note || 'Migrated from task time entry'
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                        // Save the migrated data
+                        this.saveData();
+                    }
                 } else {
                     this.data = {
                         roles: [],
@@ -2576,7 +2626,16 @@
             renderStatsWidget() {
                 const totalTasks = this.data.tasks.length;
                 const completedTasks = this.data.tasks.filter(t => t.status === 'completed').length;
-                const totalTime = this.data.timeEntries.reduce((sum, e) => sum + e.duration, 0);
+
+                // Calculate total time from timeEntries (tasks)
+                const taskTime = this.data.timeEntries.reduce((sum, e) => sum + e.duration, 0);
+
+                // Calculate total meeting time from meeting instances
+                const meetingTime = (this.data.meetingInstances || []).reduce((sum, inst) => sum + (inst.duration || 0), 0);
+
+                // Combine both for total tracked time
+                const totalTime = taskTime + meetingTime;
+
                 const upcomingReminders = this.data.reminders.filter(r => !r.notified && new Date(r.date) > new Date()).length;
 
                 return `
@@ -2748,22 +2807,36 @@
                     const totalItems = resp.plan180DayItems?.length || 0;
                     const progress = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
 
+                    // Calculate time invested in this role (tasks + meetings)
+                    const taskTime = this.data.timeEntries.filter(e => e.roleId === resp.id).reduce((sum, e) => sum + e.duration, 0);
+                    const meetingTime = (this.data.meetingInstances || [])
+                        .filter(inst => {
+                            const meeting = this.data.meetings?.find(m => m.id === inst.meetingId);
+                            return meeting && meeting.roleId === resp.id;
+                        })
+                        .reduce((sum, inst) => sum + (inst.duration || 0), 0);
+                    const totalRoleTime = taskTime + meetingTime;
+                    const totalRoleHours = Math.round(totalRoleTime / 60 * 10) / 10;
+
                     return `
                         <div style="background: var(--surface); border-left: 4px solid ${resp.color}; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.5)';" onmouseout="this.style.transform=''; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.3)';" onclick="app.showView('responsibilities')">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                 <span style="background: ${resp.color}; color: ${resp.color === '#FDE428' ? 'var(--primary)' : 'white'}; padding: 4px 10px; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">${resp.name}</span>
                                 <div style="font-size: 20px; font-weight: 900; color: var(--adidas-yellow); line-height: 1;">${progress}%</div>
                             </div>
-                            <div class="progress-bar" style="height: 5px; margin-bottom: 6px;">
+                            <div class="progress-bar" style="height: 5px; margin-bottom: 8px;">
                                 <div class="progress-fill" style="width: ${progress}%"></div>
                             </div>
-                            <div style="font-size: 10px; color: var(--text-muted); line-height: 1.3;">${completedItems}/${totalItems} goals • ${tasks.length} tasks • ${openTasks} open</div>
+                            <div style="font-size: 10px; color: var(--text-muted); line-height: 1.4; margin-bottom: 6px;">${completedItems}/${totalItems} goals • ${tasks.length} tasks • ${openTasks} open</div>
+                            <div style="font-size: 11px; color: var(--adidas-blue); font-weight: 700; display: flex; align-items: center; gap: 4px;">
+                                <span>⏱</span> ${totalRoleHours}h invested
+                            </div>
                         </div>
                     `;
                 }).join('');
 
                 const rolesHTML = respOverviewHTML ?
-                    `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 15px;">${respOverviewHTML}</div>` :
+                    `<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px;">${respOverviewHTML}</div>` :
                     '<div class="empty-state">No role dimensions defined</div>';
 
                 const today = new Date();
@@ -6567,6 +6640,18 @@
                         date: new Date().toISOString(),
                         note: content.substring(0, 100) // First 100 chars as note
                     });
+
+                    // Also add to global timeEntries for dashboard aggregation
+                    const taskRoleIds = task.roleIds || (task.roleId ? [task.roleId] : []);
+                    const primaryRoleId = taskRoleIds[0] || null;
+                    this.data.timeEntries.push({
+                        id: 'time_' + Date.now() + '_global',
+                        roleId: primaryRoleId,
+                        taskId: task.id,
+                        duration: timeSpent,
+                        date: new Date().toISOString(),
+                        notes: content.substring(0, 100)
+                    });
                 }
 
                 this.saveData();
@@ -6699,6 +6784,18 @@
                         duration: timeSpent,
                         date: new Date().toISOString(),
                         note: content.substring(0, 100)
+                    });
+
+                    // Also add to global timeEntries for dashboard aggregation
+                    const taskRoleIds = task.roleIds || (task.roleId ? [task.roleId] : []);
+                    const primaryRoleId = taskRoleIds[0] || null;
+                    this.data.timeEntries.push({
+                        id: 'time_' + Date.now() + '_global',
+                        roleId: primaryRoleId,
+                        taskId: task.id,
+                        duration: timeSpent,
+                        date: new Date().toISOString(),
+                        notes: content.substring(0, 100)
                     });
                 }
 
