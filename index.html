@@ -2353,6 +2353,11 @@
                 this.renderAll();
                 this.checkReminders();
                 setInterval(() => this.checkReminders(), 60000);
+
+                // Check and update past meetings on load
+                this.checkAndUpdatePastMeetings();
+                // Also check periodically (every 5 minutes)
+                setInterval(() => this.checkAndUpdatePastMeetings(), 300000);
             },
 
             loadTheme() {
@@ -2568,6 +2573,62 @@
                 localStorage.setItem('workOrganizerData', JSON.stringify(this.data));
             },
 
+            // ---- Role dimension attribution ----------------------------------
+            // An item (task/meeting) can belong to several role dimensions.
+            // Rule: the item counts as 1 in EVERY role it belongs to, while its
+            // logged time is split EQUALLY across those roles, so the hours add
+            // up to the real total instead of all landing on the first role.
+
+            getItemRoleIds(item) {
+                if (!item) return [];
+                if (Array.isArray(item.roleIds) && item.roleIds.length > 0) {
+                    return item.roleIds.filter(id => id);
+                }
+                return item.roleId ? [item.roleId] : [];
+            },
+
+            getRoleTasks(roleId) {
+                return this.data.tasks.filter(t => this.getItemRoleIds(t).includes(roleId));
+            },
+
+            // Roles a time entry belongs to. Prefer the task's current role
+            // assignment so re-assigning a task re-distributes its history too;
+            // fall back to the entry's own roleId (manual/timer entries).
+            getEntryRoleIds(entry) {
+                const task = entry.taskId ? this.data.tasks.find(t => t.id === entry.taskId) : null;
+                if (task) {
+                    const taskRoleIds = this.getItemRoleIds(task);
+                    if (taskRoleIds.length > 0) return taskRoleIds;
+                }
+                return entry.roleId ? [entry.roleId] : [];
+            },
+
+            getRoleTaskMinutes(roleId) {
+                return (this.data.timeEntries || []).reduce((sum, entry) => {
+                    const entryRoleIds = this.getEntryRoleIds(entry);
+                    if (!entryRoleIds.includes(roleId)) return sum;
+                    return sum + (entry.duration || 0) / entryRoleIds.length;
+                }, 0);
+            },
+
+            getRoleMeetingMinutes(roleId) {
+                return (this.data.meetingInstances || []).reduce((sum, inst) => {
+                    const meeting = (this.data.meetings || []).find(m => m.id === inst.meetingId);
+                    const meetingRoleIds = this.getItemRoleIds(meeting);
+                    if (!meetingRoleIds.includes(roleId)) return sum;
+                    return sum + (inst.duration || 0) / meetingRoleIds.length;
+                }, 0);
+            },
+
+            // Total minutes attributed to a role: task time + meeting time.
+            getRoleMinutes(roleId) {
+                return this.getRoleTaskMinutes(roleId) + this.getRoleMeetingMinutes(roleId);
+            },
+
+            formatHours(minutes) {
+                return Math.round((minutes || 0) / 60 * 10) / 10;
+            },
+
             toggleSidebar() {
                 document.getElementById('sidebar').classList.toggle('expanded');
             },
@@ -2599,6 +2660,9 @@
             },
 
             renderDashboard() {
+                // Check and auto-update any meetings whose nextOccurrence has passed
+                this.checkAndUpdatePastMeetings();
+
                 // Load layout from localStorage if exists
                 const savedLayout = localStorage.getItem('dashboardLayout');
                 if (savedLayout) {
@@ -5241,6 +5305,9 @@
                 if (!this.data.meetings) this.data.meetings = [];
                 if (!this.data.meetingInstances) this.data.meetingInstances = [];
 
+                // Check and auto-update any meetings whose nextOccurrence has passed
+                this.checkAndUpdatePastMeetings();
+
                 const today = new Date();
 
                 // Sort meetings by closest next occurrence date
@@ -6243,8 +6310,8 @@
                         break;
                 }
 
-                // Update the meeting's date to next occurrence
-                meeting.date = nextDate.toISOString();
+                // Update the meeting's nextOccurrence to next occurrence (NOT meeting.date - that stays as original start date)
+                meeting.nextOccurrence = nextDate.toISOString();
 
                 // Track this update in activity (ensure activities array exists)
                 if (!this.data.activities) {
@@ -6259,6 +6326,32 @@
                 });
 
                 // Don't call saveData here - let the caller handle it
+            },
+
+            checkAndUpdatePastMeetings() {
+                // Check all active meetings and automatically update nextOccurrence if it has passed
+                const now = new Date();
+                let updatedAny = false;
+
+                this.data.meetings.forEach(meeting => {
+                    if (!meeting.active || meeting.recurrence === 'none' || !meeting.nextOccurrence) {
+                        return;
+                    }
+
+                    const nextOccurrence = new Date(meeting.nextOccurrence);
+                    const meetingEndTime = new Date(nextOccurrence.getTime() + (meeting.duration || 30) * 60000);
+
+                    // If the meeting (including duration) has passed, update to next occurrence
+                    if (meetingEndTime < now) {
+                        console.log(`Auto-updating meeting "${meeting.title}" - occurrence has passed`);
+                        this.updateMeetingToNextOccurrence(meeting, meeting.nextOccurrence);
+                        updatedAny = true;
+                    }
+                });
+
+                if (updatedAny) {
+                    this.saveData();
+                }
             },
 
             viewMeetingInstance(instanceId, fromMeetingDetail = false) {
